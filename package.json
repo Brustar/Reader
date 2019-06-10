@@ -1,0 +1,69 @@
+{
+  "name": "Reader",
+  "productName": "Reader",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": "brustar",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "Reader"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "Reader"
+      }
+    }
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.4",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "epubjs": "^0.3.84",
+    "pdfjs-dist": "^2.0.943",
+    "vue": "^2.6.10",
+    "vue-router": "^2.3.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^2.1.1",
+    "url-loader": "^0.5.9",
+    "vue-loader": "^13.3.0",
+    "vue-style-loader": "^3.0.1",
+    "electron-forge": "^5.2.4",
+    "electron-prebuilt-compile": "4.0.0"
+  }
+}

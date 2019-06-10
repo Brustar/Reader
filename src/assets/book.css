@@ -1,0 +1,150 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+ul{
+  list-style-type:none;
+}
+li{
+  padding: 12px;
+}
+li:active{
+  background: gray;
+}
+.status{
+  width:100%;
+  height:30px;
+  position:fixed;
+  z-index: 9999;
+  text-align: center;
+  bottom: 0;
+  font-size: 12px;
+  color: gray;
+  font-weight:bold;
+  font-family: sans-serif;
+}
+.menu{
+  width:300px;
+  height:100%;
+  background:#eee;
+  position:fixed;
+  z-index: 9999;
+  overflow: auto;
+}
+
+.title{
+  color: gray;
+  text-align: center;
+  padding: 10px;
+  font-family: sans-serif;
+}
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0%   {left:-300px; top:0px;}
+  100%  {left:0px; top:0px;}
+}
+
+.search-enter,.search-leave-active{
+  opacity: :0;
+  transform: translate3d(0,5%,0);
+}
+.search-enter-active,.search-leave-active{
+  transition: all .5s cubic-bezier(0.4,0,0,1.5);
+}
+
+.search{
+  left: 0px;
+  padding: 10px;
+  height:30px;
+  width:200px;
+  top:30px;
+  position: fixed;
+  background: #eee;
+  text-align: center;
+}
+
+input:focus{ outline:none; }
+
+input{
+  height: 20px;
+  margin: 10px;
+  border-radius:9px;
+  padding: 0 10px 0 35px;
+  background-image: url(search.png);
+  background-repeat: no-repeat;
+  background-position: 5px 2px;
+}
+
+.book{
+  width:80%;
+  height: 80%;
+  position: fixed;
+  left: 10%;
+  top: 10%;
+}
+.leftbar{
+  width:10%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  text-align: center;
+  display:inline-block;
+}
+.rightbar{
+  z-index: 9998;
+  position: fixed;
+  width: 10%;
+  height: 100%;
+  right: 8px;
+  top: 8px;
+  display:inline-block;
+}
+
+.leftbar:hover .leftImg{
+  display:block;
+}
+
+.rightbar:hover .rightImg{
+  display:block;
+}
+
+.leftImg{
+  position:fixed;
+  top:50%;
+  padding-left: 5%;
+  display:none;
+}
+
+.rightImg{
+  position:fixed;
+  top:50%;
+  padding-left: 5%;
+  display:none;
+}
+
+.toolbar{
+  z-index: 9999;
+  width:100%;
+  height:30px;
+  position:fixed;
+  top:0;
+  display:inline-block;
+}
+.toolbar:hover{
+  background:#eee;
+}
+.toolbar:hover .box{
+  display:block;
+}
+ul{ padding:0; margin:0; overflow:hidden;}
+.box>li{padding:0; margin:0;list-style:none;text-align: center;}
+img{ border:0;}
+.box{ width:186px;margin-left: 0px;display:none;}
+.box li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}

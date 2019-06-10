@@ -1,0 +1,34 @@
+module.exports = [
+  {
+    name:"default",
+    style:{
+      body:{
+        color:"#000",background:"#fff"
+      }
+    }
+  },
+  {
+    name:"dark",
+    style:{
+      body:{
+        color:"#fff",background:"#000"
+      }
+    }
+  },
+  {
+    name:"gold",
+    style:{
+      body:{
+        color:"#000",background:"#f1ece2"
+      }
+    }
+  },
+  {
+    name:"eye",
+    style:{
+      body:{
+        color:"#000",background:"#ceeaba"
+      }
+    }
+  }
+]
