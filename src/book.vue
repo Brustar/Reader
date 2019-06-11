@@ -1,34 +1,16 @@
 <template>
   <div>
-    <div class="toolbar">
-      <ul class="box">
-       <li><img src="assets/book.png"/></li>
-       <li @click="list('dir')"><img src="assets/dir.png"/></li>
-       <li><img src="assets/note.png"/></li>
+    
+    <toolbar @list="list" @submit="submit"></toolbar>
 
-       <li @click="cansearch = !cansearch"><img src="assets/search.png"/></li>
-       <li><img src="assets/font.png"/></li>
-       <li @click="list('bookmark')"><img src="assets/bookmark.png"/></li>
-
-      <transition name="search">
-        <div v-if="cansearch" class="search">
-          <input type="text" autofocus="autofocus" v-model="key" @keydown="submit($event)" placeholder="请输入关键字"/>
-        </div>
-      </transition>
-      </ul>
-    </div>
     <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)"></div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="assets/left.png"/></div>
     <div class="rightbar" @click="next"><img class="rightImg" src="assets/right.png"/></div>
-    <transition name="bounce">
-      <div class="menu" v-if="show">
-        <div class="title">{{title}}</div>
-        <ul>
-          <li v-for="item in dirs" @click="nav(item.href)">{{item.label}}</li>
-        </ul>
-      </div>
-    </transition>
-    <div class="status" v-if="percentage>0">位置 {{percentage}}%</div>
+
+    <leftbar :show="show" :title="title" :dirs="dirs" @nav="nav"></leftbar>
+
+    <statubar :percentage="percentage"></statubar>
+
   </div>
 </template>
 
@@ -36,16 +18,21 @@
 const {ipcRenderer} = require('electron')
 import Reader from "./Reader";
 import pdfReader from "./pdfReader"
+import statubar from "./statubar"
+import toolbar from "./toolbar"
+import leftbar from "./leftbar"
 const path = require('path')
 
 export default {
   name: 'book',
+  components:{
+		statubar,toolbar,leftbar
+	},
   data () {
     return {
       dirs:[],
       percentage:0,
       title:"目录",
-      cansearch:false,
       show:false
     }
   },
@@ -72,7 +59,6 @@ export default {
   methods:{
     listener(){
       this.actions.forEach(action => {
-        console.log(action)
         ipcRenderer.on(action,(e,data)=> {
           this[action](data)
         })
@@ -114,7 +100,7 @@ export default {
     zoomOut:function(){
       this.book.zoomOut()
     },
-    list(action){
+    list(action,key){
       if(action == "dir"){
         this.dirs = this.book.listdir()
         this.title = "目录"
@@ -124,7 +110,7 @@ export default {
         this.title = "书签"
       }
       if(action == "search"){
-        this.dirs = this.search()
+        this.dirs = this.search(key)
         this.title = "搜索"
       }
       this.show = !this.show
@@ -142,16 +128,15 @@ export default {
     comment(range){
       this.book.comment(range)
     },
-    submit(e){
-     var evt = window.event || e;
+    submit(e,key){
+     var evt = window.event || e
       if (evt.keyCode == 13){
-        this.list("search")
-        this.canSearch = false
+        this.list("search",key)
       }
     },
-    search(){
+    search(key){
       var results = []
-      this.book.search(this.key,(ret) => {
+      this.book.search(key,(ret) => {
         ret.forEach( (result,index) => {
           results.push({label:index+". "+result.excerpt.trim(),href:result.cfi})
         })
@@ -159,7 +144,7 @@ export default {
       return results
     },
     bookClick(){
-      this.show = this.cansearch = false
+      this.show = false
     },
     changeTheme(name){
       this.book.themeList.forEach(theme => {
