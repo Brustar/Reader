@@ -38,8 +38,7 @@ export default class Reader {
 				var percentage = Math.floor(percent * 100)
         localStorage.setItem(this.book.key(path)+'-locations', location.start.cfi);
 
-        var page = this.book.pageList.pageFromCfi(location.start.cfi)
-        console.log("p:",location.start.cfi,page)
+        //var page = this.book.pageList.pageFromCfi(location.start.cfi)
 
         progress(percentage)
 		})

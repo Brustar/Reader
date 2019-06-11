@@ -179,11 +179,11 @@ export default class MainMenu{
   }
 
   changeTheme(name){
-    this.mainWindow.webContents.send("theme",name)
+    this.mainWindow.webContents.send("changeTheme",name)
   }
 
   changeFont(name){
-    this.mainWindow.webContents.send("font",name)
+    this.mainWindow.webContents.send("changeFont",name)
   }
 
   openbook(){

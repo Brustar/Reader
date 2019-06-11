@@ -66,45 +66,18 @@ export default {
         this.zoomOut()
       }
     }, true)
-    ipcRenderer.on("openbook",(e,path)=> {
-      this.openbook(path)
-    })
-    ipcRenderer.on("underline",(e,range)=> {
-      this.underline(range)
-    })
-    ipcRenderer.on("comment",(e,range)=> {
-      this.comment(range)
-    })
-    ipcRenderer.on("zoomIn",(e)=> {
-      this.zoomIn()
-    })
-    ipcRenderer.on("zoomOut",(e)=> {
-      this.zoomOut()
-    })
-    ipcRenderer.on("list",(e,action)=> {
-      this.list(action)
-    })
-    ipcRenderer.on("bookmark",(e)=> {
-      this.bookmark()
-    })
-    ipcRenderer.on("search",(e)=> {
-      this.search()
-    })
-    ipcRenderer.on("bookClick",(e)=> {
-      this.hide()
-    })
-    ipcRenderer.on("theme",(e,name)=> {
-      this.book.themeList.forEach(theme => {
-        if(theme.name == name)
-          document.body.style.background = theme.style.body.background
-      })
-      this.book.changeTheme(name)
-    })
-    ipcRenderer.on("font",(e,name)=> {
-      this.book.changeFont(name)
-    })
+    this.actions = ["openbook","underline","comment","zoomIn","zoomOut","list","bookmark","search","changeTheme","changeFont","bookClick"]
+    this.listener()
   },
   methods:{
+    listener(){
+      this.actions.forEach(action => {
+        console.log(action)
+        ipcRenderer.on(action,(e,data)=> {
+          this[action](data)
+        })
+      })
+    },
     open:function(){
       ipcRenderer.send('openbook')
     },
@@ -185,8 +158,18 @@ export default {
       })
       return results
     },
-    hide(){
+    bookClick(){
       this.show = this.cansearch = false
+    },
+    changeTheme(name){
+      this.book.themeList.forEach(theme => {
+        if(theme.name == name)
+          document.body.style.background = theme.style.body.background
+      })
+      this.book.changeTheme(name)
+    },
+    changeFont(name){
+      this.book.changeFont(name)
     }
   }
 }
