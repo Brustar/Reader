@@ -8,9 +8,7 @@ ul{
 li{
   padding: 12px;
 }
-li:active{
-  background: gray;
-}
+
 .status{
   width:100%;
   height:30px;
@@ -51,10 +49,10 @@ li:active{
 
 .search-enter,.search-leave-active{
   opacity: :0;
-  transform: translate3d(0,5%,0);
+  transform: translate3d(0,1%,0);
 }
 .search-enter-active,.search-leave-active{
-  transition: all .5s cubic-bezier(0.4,0,0,1.5);
+  transition: all .2s cubic-bezier(0.4,0,0,0);
 }
 
 .search{
@@ -66,6 +64,38 @@ li:active{
   position: fixed;
   background: #eee;
   text-align: center;
+  border-radius:5px;
+}
+
+.themeSwap{
+  left: 0px;
+  padding: 10px;
+  height:100px;
+  width:200px;
+  top:30px;
+  position: fixed;
+  background: #eee;
+  text-align: center;
+  border-radius:5px;
+}
+
+.themeSwap>.zoom>li{
+  float: left;
+  height: 40px;
+  width: 45%;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.themeSwap>.theme>li{
+  float: left;
+  top:40px;
+  height: 30px;
+  width: 16%;
+  background: #fee;
+  padding-right: 20px;
+  box-sizing: border-box;
+  border-radius:15px;
 }
 
 input:focus{ outline:none; }

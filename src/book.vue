@@ -1,7 +1,7 @@
 <template>
   <div>
-    
-    <toolbar @list="list" @submit="submit"></toolbar>
+
+    <toolbar @list="list" @submit="submit" @zoomIn="zoomIn" @zoomOut="zoomOut"></toolbar>
 
     <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)"></div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="assets/left.png"/></div>
