@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <toolbar @list="list" @submit="submit" @zoomIn="zoomIn" @zoomOut="zoomOut"></toolbar>
+    <toolbar ref="toolbar" @list="list" @submit="submit" @zoomIn="zoomIn" @zoomOut="zoomOut"></toolbar>
 
     <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)"></div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="assets/left.png"/></div>
@@ -53,7 +53,7 @@ export default {
         this.zoomOut()
       }
     }, true)
-    this.actions = ["openbook","underline","comment","zoomIn","zoomOut","list","bookmark","search","changeTheme","changeFont","bookClick"]
+    this.actions = ["openbook","underline","comment","zoomIn","zoomOut","list","bookmark","find","changeTheme","changeFont","bookClick"]
     this.listener()
   },
   methods:{
@@ -134,6 +134,9 @@ export default {
         this.list("search",key)
       }
     },
+    find(){
+      this.$refs.toolbar.find();
+    },
     search(key){
       var results = []
       this.book.search(key,(ret) => {
@@ -145,6 +148,7 @@ export default {
     },
     bookClick(){
       this.show = false
+      this.$refs.toolbar.unfind()
     },
     changeTheme(name){
       this.book.themeList.forEach(theme => {

@@ -1,6 +1,6 @@
 <template>
-  <div class="toolbar">
-    <ul class="box">
+  <div :class="canTool?'toolbarShow':'toolbar'">
+    <ul :class="canTool?'boxShow':'box'">
      <li><img src="assets/book.png"/></li>
      <li @click="list('dir')"><img src="assets/dir.png"/></li>
      <li><img src="assets/note.png"/></li>
@@ -43,6 +43,7 @@ export default {
     return {
       canSearch:false,
       canTheme:false,
+      canTool:false,
       keyword:""
     }
   },
@@ -58,6 +59,15 @@ export default {
     },
     zoomOut(){
       this.$emit('zoomOut')
+    },
+    find(){
+      this.canTool=true
+      this.canSearch=true
+    },
+    unfind(){
+      alert(11)
+      this.canTool=false
+      this.canSearch=false
     }
   }
 }

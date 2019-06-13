@@ -156,10 +156,10 @@ export default class MainMenu{
             }
           },
           {
-            label:"search",
+            label:"find...",
             accelerator:"CmdOrCtrl+F",
             click:() => {
-              this.search()
+              this.find()
             }
           },
           {
@@ -174,8 +174,8 @@ export default class MainMenu{
     this.mainWindow.webContents.send("list",action)
   }
 
-  search(){
-    this.mainWindow.webContents.send("search")
+  find(){
+    this.mainWindow.webContents.send("find")
   }
 
   changeTheme(name){
