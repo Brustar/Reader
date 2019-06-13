@@ -19,10 +19,10 @@
           <li @click="zoomIn()"><img src="assets/zoomIn.png"/></li>
         </ul>
         <ul class="theme">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <span class="default" @click="theme('default')"><span v-if="sel==1" class="correct-dark">√</span></span>
+          <span class="gold" @click="theme('gold')"><span v-if="sel==2" class="correct-dark">√</span></span>
+          <span class="eye" @click="theme('eye')"><span v-if="sel==3" class="correct-dark">√</span></span>
+          <span class="dark" @click="theme('dark')"><span v-if="sel==4" class="correct">√</span></span>
         </ul>
         <ul class="font">
           <li></li>
@@ -44,6 +44,7 @@ export default {
       canSearch:false,
       canTheme:false,
       canTool:false,
+      sel:0,
       keyword:""
     }
   },
@@ -60,12 +61,22 @@ export default {
     zoomOut(){
       this.$emit('zoomOut')
     },
+    theme(name){
+      if(name == 'default')
+        this.sel=1
+      if(name == 'gold')
+        this.sel=2
+      if(name == 'eye')
+        this.sel=3
+      if(name == 'dark')
+        this.sel=4
+      this.$emit('theme',name)
+    },
     find(){
       this.canTool=true
       this.canSearch=true
     },
     unfind(){
-      alert(11)
       this.canTool=false
       this.canSearch=false
     }
