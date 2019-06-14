@@ -55,7 +55,7 @@ export default {
         this.zoomOut()
       }
     }, true)
-    this.actions = ["openbook","underline","comment","zoomIn","zoomOut","list","bookmark","find","changeTheme","changeFont","bookClick"]
+    this.actions = ["openbook","underline","keynote","comment","zoomIn","zoomOut","list","bookmark","find","changeTheme","changeFont","bookClick"]
     this.listener()
   },
   methods:{
@@ -130,6 +130,9 @@ export default {
     },
     comment(range){
       this.book.comment(range)
+    },
+    keynote(obj){
+      this.book.keynote(obj)
     },
     submit(e,key){
      var evt = window.event || e

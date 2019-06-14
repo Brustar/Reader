@@ -1,5 +1,5 @@
 
-import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow } from 'electron'
+import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow , nativeImage } from 'electron'
 
 export default class MainMenu{
   constructor(mainWindow) {
@@ -207,7 +207,25 @@ export default class MainMenu{
 
   createPopupMenu(event,data){
     const menu = new Menu()
-  	menu.append(new MenuItem({ label: 'add comment',click:() => {
+  	menu.append(new MenuItem({ label: 'keynote',submenu:[{label:"yellow",click:() => {
+        this.mainWindow.webContents.send("keynote",{range:data.range,color:"yellow"})
+    }},
+    {label:"green",click:() => {
+        this.mainWindow.webContents.send("keynote",{range:data.range,color:"green"})
+    }},
+    {label:"cyan",click:() => {
+        this.mainWindow.webContents.send("keynote",{range:data.range,color:"cyan"})
+    }},
+    {label:"pink",click:() => {
+        this.mainWindow.webContents.send("keynote",{range:data.range,color:"pink"})
+    }},
+    {label:"purple",click:() => {
+        this.mainWindow.webContents.send("keynote",{range:data.range,color:"purple"})
+    }},
+    {label: 'underline',click:() => {
+        this.mainWindow.webContents.send("underline",data.range)
+    }}] }))
+    menu.append(new MenuItem({ label: 'add comment',click:() => {
         //shell.openExternal('https://www.baidu.com')
         this.mainWindow.webContents.send("comment",data.range)
     } }))
@@ -216,9 +234,6 @@ export default class MainMenu{
   				clipboard.writeText(data.text)
   			}
   	}))
-    menu.append(new MenuItem({ label: 'underline',click:() => {
-        this.mainWindow.webContents.send("underline",data.range)
-    } }))
   	const win = BrowserWindow.fromWebContents(event.sender)
   	menu.popup(win);
   }

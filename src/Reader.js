@@ -167,11 +167,14 @@ export default class Reader {
     localStorage.setItem(this.book.key(this.path)+'-bookmarks', JSON.stringify(this.bookmarks))
   }
 
+  keynote(obj){
+    this.rendition.annotations.highlight(obj.range, {}, (e) => {},"",{"fill": obj.color, "fill-opacity": "0.4", "mix-blend-mode": "multiply"})
+    this.rendition.annotations.mark(obj.range, {}, (e) => {
+    })
+  }
+
   comment(range){
-    this.rendition.annotations.highlight(range, {}, (e) => {
-    })
-    this.rendition.annotations.mark(range, {}, (e) => {
-    })
+
   }
 
   search(q,dosearch){
