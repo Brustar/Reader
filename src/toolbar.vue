@@ -18,18 +18,18 @@
           <li @click="zoomOut()"><img src="assets/zoomOut.png"/></li>
           <li @click="zoomIn()"><img src="assets/zoomIn.png"/></li>
         </ul>
-        <ul class="theme">
+        <div class="theme">
           <span class="default" @click="theme('default')"><span v-if="sel==1" class="correct-dark">√</span></span>
           <span class="gold" @click="theme('gold')"><span v-if="sel==2" class="correct-dark">√</span></span>
           <span class="eye" @click="theme('eye')"><span v-if="sel==3" class="correct-dark">√</span></span>
           <span class="dark" @click="theme('dark')"><span v-if="sel==4" class="correct">√</span></span>
-        </ul>
-        <ul class="font">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
+        </div>
+        <div class="font">
+          <div class="song" @click="font('STSong')"><span v-if="selFont==1">√</span>宋体</div>
+          <div class="hei" @click="font('STHeiti')"><span v-if="selFont==2">√</span>黑体</div>
+          <div class="kai" @click="font('STKaiti')"><span v-if="selFont==3">√</span>楷体</div>
+          <div class="apple" @click="font('sans-serif')"><span v-if="selFont==4">√</span>苹方</div>
+        </div>
       </div>
     </transition>
     </ul>
@@ -45,6 +45,7 @@ export default {
       canTheme:false,
       canTool:false,
       sel:0,
+      selFont:0,
       keyword:""
     }
   },
@@ -71,6 +72,17 @@ export default {
       if(name == 'dark')
         this.sel=4
       this.$emit('theme',name)
+    },
+    font(name){
+      if(name == 'STSong')
+        this.selFont=1
+      if(name == 'STHeiti')
+        this.selFont=2
+      if(name == 'STKaiti')
+        this.selFont=3
+      if(name == 'sans-serif')
+        this.selFont=4
+      this.$emit('font',name)
     },
     find(){
       this.canTool=true

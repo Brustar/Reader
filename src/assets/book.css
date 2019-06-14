@@ -70,7 +70,7 @@ li{
 .themeSwap{
   left: 0px;
   padding: 10px;
-  height:100px;
+  height:300px;
   width:200px;
   top:30px;
   position: fixed;
@@ -87,13 +87,20 @@ li{
   box-sizing: border-box;
 }
 
-.themeSwap>.font>li{
-  float: left;
-  box-sizing: border-box;
-  border-radius:50%;
-
-
+.font{
+  position:fixed;
+  left:50px;
+  margin-top: 20px;
 }
+
+.theme{
+  margin-top: 20px;
+}
+
+.song{font-family: "STSong";padding: 12px;}
+.hei{font-family: "STHeiti";padding: 12px;}
+.kai{font-family: "STKaiti";padding: 12px;}
+.apple{font-family: "sans-serif";padding: 12px;}
 
 .default{margin-right: 10px;border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #fff;}
 .gold{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #f1ece2;}
