@@ -33,14 +33,14 @@ export default class Reader {
         return this.book.locations.generate()
     })
 
-    this.rendition.on('relocated', function(location){
+    this.rendition.on('relocated', (location) => {
 				var percent = this.book.locations.percentageFromCfi(location.start.cfi)
 				var percentage = Math.floor(percent * 100)
         localStorage.setItem(this.book.key(path)+'-locations', location.start.cfi);
 
         //var page = this.book.pageList.pageFromCfi(location.start.cfi)
-
-        progress(percentage)
+        var bookmarked = this.isBookmarked(location.start.cfi)!=-1
+        progress(percentage,bookmarked)
 		})
 
     this.rendition.on("click",() => {

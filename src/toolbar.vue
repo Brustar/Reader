@@ -7,7 +7,8 @@
 
      <li @click="canTheme=false;canSearch=!canSearch"><img src="assets/search.png"/></li>
      <li @click="canSearch=false;canTheme=!canTheme"><img src="assets/font.png"/></li>
-     <li @click="list('bookmark')"><img src="assets/bookmark.png"/></li>
+     <li @click="bookmark()"><img src="assets/bookmark.png"/></li>
+     <li @click="list('bookmark')" class="arrow"><img src="assets/arrow_down.png"/></li>
 
     <transition name="search">
       <div v-if="canSearch" class="search">
@@ -83,6 +84,9 @@ export default {
       if(name == 'sans-serif')
         this.selFont=4
       this.$emit('font',name)
+    },
+    bookmark(){
+      this.$emit('bookmark')
     },
     find(){
       this.canTool=true

@@ -161,7 +161,10 @@ input{
 .rightbar:hover .rightImg{
   display:block;
 }
-
+.bookmark{
+  float: right;
+  padding-right: 5%;
+}
 .leftImg{
   position:fixed;
   top:50%;
@@ -206,6 +209,11 @@ ul{ padding:0; margin:0; overflow:hidden;}
 .box>li{padding:0; margin:0;list-style:none;text-align: center;}
 .boxShow>li{padding:0; margin:0;list-style:none;text-align: center;}
 img{ border:0;}
-.box{ width:186px;margin-left: 0px;display:none;}
+.box{ width:250px;margin-left: 0px;display:none;}
 .box li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
 .boxShow li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
+.arrow{
+  position:fixed;
+  left: 172px;
+  top:5px;
+}

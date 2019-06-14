@@ -1,7 +1,8 @@
 <template>
   <div>
 
-    <toolbar ref="toolbar" @list="list" @submit="submit" @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont"></toolbar>
+    <toolbar ref="toolbar" @bookmark="bookmark" @list="list" @submit="submit"
+    @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont"></toolbar>
 
     <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)"></div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="assets/left.png"/></div>
@@ -9,7 +10,7 @@
 
     <leftbar :show="show" :title="title" :dirs="dirs" @nav="nav"></leftbar>
 
-    <statubar :percentage="percentage"></statubar>
+    <statubar :percentage="percentage" :bookmarked="bookmarked"></statubar>
 
   </div>
 </template>
@@ -33,6 +34,7 @@ export default {
       dirs:[],
       percentage:0,
       title:"目录",
+      bookmarked:false,
       show:false
     }
   },
@@ -78,8 +80,9 @@ export default {
     openbook:function(p){
       if(path.extname(p)==".epub")
       {
-        this.book.createBook(p,"container",(percent)=>{
+        this.book.createBook(p,"container",(percent,bookmarked)=>{
           this.percentage = percent
+          this.bookmarked = bookmarked
         })
       }
       if(path.extname(p)==".pdf")
