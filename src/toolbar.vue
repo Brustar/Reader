@@ -3,7 +3,7 @@
     <ul :class="canTool?'boxShow':'box'">
      <li><img src="assets/book.png"/></li>
      <li @click="list('dir')"><img src="assets/dir.png"/></li>
-     <li><img src="assets/note.png"/></li>
+     <li @click="list('note')"><img src="assets/note.png"/></li>
 
      <li @click="canTheme=false;canSearch=!canSearch"><img src="assets/search.png"/></li>
      <li @click="canSearch=false;canTheme=!canTheme"><img src="assets/font.png"/></li>

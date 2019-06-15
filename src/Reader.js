@@ -55,10 +55,18 @@ export default class Reader {
        })
    })
 
+    this.initData(path)
+  }
+
+  initData(path){
     this.path = path
     var bkey = this.book.key(path)+'-bookmarks'
     var store = JSON.parse(localStorage.getItem(bkey))
     this.bookmarks = store ? store : []
+
+    var nkey = this.book.key(path)+'-notes'
+    var nstore = JSON.parse(localStorage.getItem(nkey))
+    this.notes = nstore ? nstore : []
   }
 
   underline(range){
@@ -134,6 +142,20 @@ export default class Reader {
       this.themes.font(font)
   }
 
+  listnotes(){
+    var nts = []
+    if(this.notes.length>0){
+      this.notes.forEach(obj =>{
+        var n={}
+        n.label = obj.note
+        n.href = obj.cfi
+
+        nts.push(n)
+      })
+    }
+    return nts
+  }
+
   listBookmarks(){
     var bks = []
     if(this.bookmarks.length>0){
@@ -168,13 +190,15 @@ export default class Reader {
   }
 
   keynote(obj){
-    this.rendition.annotations.highlight(obj.range, {}, (e) => {},"",{"fill": obj.color, "fill-opacity": "0.4", "mix-blend-mode": "multiply"})
+    this.rendition.annotations.highlight(obj.range, {}, (e) => {alert(11)},"",{"fill": obj.color, "fill-opacity": "0.4", "mix-blend-mode": "multiply"})
     this.rendition.annotations.mark(obj.range, {}, (e) => {
     })
   }
 
-  comment(range){
-
+  donote(note,cfi){
+    this.keynote({range:cfi,color:"yellow"})
+    this.notes.push({note:note,cfi:cfi,modified:Date()})
+    localStorage.setItem(this.book.key(this.path)+'-notes', JSON.stringify(this.notes))
   }
 
   search(q,dosearch){

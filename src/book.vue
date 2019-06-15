@@ -11,7 +11,7 @@
     <leftbar :show="show" :title="title" :dirs="dirs" @nav="nav"></leftbar>
 
     <statubar :percentage="percentage" :bookmarked="bookmarked"></statubar>
-
+    <notebox v-if="cannote" @donote="donote"></notebox>
   </div>
 </template>
 
@@ -22,12 +22,13 @@ import pdfReader from "./pdfReader"
 import statubar from "./statubar"
 import toolbar from "./toolbar"
 import leftbar from "./leftbar"
+import notebox from "./notebox"
 const path = require('path')
 
 export default {
   name: 'book',
   components:{
-		statubar,toolbar,leftbar
+		statubar,toolbar,leftbar,notebox
 	},
   data () {
     return {
@@ -35,7 +36,8 @@ export default {
       percentage:0,
       title:"目录",
       bookmarked:false,
-      show:false
+      show:false,
+      cannote:false
     }
   },
   mounted:function(){
@@ -116,6 +118,10 @@ export default {
         this.dirs = this.search(key)
         this.title = "搜索"
       }
+      if(action == "note"){
+        this.dirs = this.book.listnotes()
+        this.title = "备注"
+      }
       this.show = !this.show
     },
     nav(url){
@@ -129,13 +135,15 @@ export default {
       this.book.underline(range)
     },
     comment(range){
-      this.book.comment(range)
+      //this.book.comment(range)
+      this.currentcfi=range
+      this.cannote=true
     },
     keynote(obj){
       this.book.keynote(obj)
     },
     submit(e,key){
-     var evt = window.event || e
+      var evt = window.event || e
       if (evt.keyCode == 13){
         this.list("search",key)
       }
@@ -153,7 +161,7 @@ export default {
       return results
     },
     bookClick(){
-      this.show = false
+      this.show = this.cannote = false
       this.$refs.toolbar.unfind()
     },
     changeTheme(name){
@@ -165,6 +173,10 @@ export default {
     },
     changeFont(name){
       this.book.changeFont(name)
+    },
+    donote(note){
+      this.book.donote(note,this.currentcfi)
+      this.cannote = false
     }
   }
 }
