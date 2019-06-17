@@ -9,6 +9,7 @@ export default class pdfReader {
   openPdf(url){
     pdf.GlobalWorkerOptions.workerSrc = '${__dirname}/../../../node_modules/pdfjs-dist/build/pdf.worker.js'
     pdf.getDocument(url).then((doc) => {
+      this.canvas = document.querySelector("#can")
       this.doc = doc
       this.renderPage()
     })
@@ -18,12 +19,11 @@ export default class pdfReader {
   renderPage() {
     this.pageRendering = true
     this.doc.getPage(this.pageNum).then(page => {
-      var canvas = document.querySelector('#the-canvas')
       var viewport = page.getViewport(2.0)
       var h = electron.screen.getPrimaryDisplay().workAreaSize.height * 2
-      canvas.height = h
-      canvas.width = h*viewport.width/viewport.height
-      var ctx = canvas.getContext('2d')
+      this.canvas.height = h
+      this.canvas.width = h*viewport.width/viewport.height
+      var ctx = this.canvas.getContext('2d')
 
       var renderContext = {
        canvasContext: ctx,
@@ -32,8 +32,9 @@ export default class pdfReader {
       var renderTask = page.render(renderContext)
       renderTask.promise.then(() => {
         this.pageRendering = false;
-        if (this.pageNumPending !== null) {
-          this.renderPage(this.pageNumPending);
+        if (this.pageNumPending) {
+          this.pageNum = this.pageNumPending
+          this.renderPage();
           this.pageNumPending = null;
         }
       })
@@ -60,7 +61,7 @@ export default class pdfReader {
     if (this.pageRendering) {
       this.pageNumPending = num
     } else {
-      this.renderPage(num)
+      this.renderPage()
     }
   }
 
