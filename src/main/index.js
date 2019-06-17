@@ -53,8 +53,11 @@ ipcMain.on('openbook',(event)=>{
   mainMenu.openbook()
 })
 
+ipcMain.on('appendmenu',(event)=>{
+  mainMenu.appendMenu()
+})
+
 ipcMain.on('rightClick', (event,data) => {
-	//! 生成菜单
   mainMenu.createPopupMenu(event,data)
 })
 

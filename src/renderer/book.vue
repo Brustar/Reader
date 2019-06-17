@@ -2,9 +2,11 @@
   <div>
 
     <toolbar ref="toolbar" @bookmark="bookmark" @list="list" @submit="submit" @openbook="open"
-    @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont"></toolbar>
+    @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook"></toolbar>
 
-    <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)"></div>
+    <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
+        <span class="tips"><img src="../assets/document.png" /> Double click or drag file here.</span>
+    </div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="../assets/left.png"/></div>
     <div class="rightbar" @click="next"><img class="rightImg" src="../assets/right.png"/></div>
 
@@ -37,7 +39,8 @@ export default {
       title:"目录",
       bookmarked:false,
       show:false,
-      cannote:false
+      cannote:false,
+      canbook:false
     }
   },
   mounted:function(){
@@ -85,6 +88,7 @@ export default {
         this.book.createBook(p,"container",(percent,bookmarked)=>{
           this.percentage = percent
           this.bookmarked = bookmarked
+          this.canbook = true
         })
       }
       if(path.extname(p)==".pdf")
@@ -92,6 +96,7 @@ export default {
         alert("dev...")
         this.pdf.openPdf(p)
       }
+      ipcRenderer.send('appendmenu')
     },
     prev:function(){
       this.book.prev()

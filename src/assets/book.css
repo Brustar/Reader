@@ -237,3 +237,11 @@ img{ border:0;}
 }
 
 .txtnote:focus{ outline:none; }
+.tips{
+  text-align: center;
+  line-height:600px;
+  color: grey;
+  width:80%;
+  height:80%;
+  position:fixed;
+}

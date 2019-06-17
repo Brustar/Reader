@@ -5,7 +5,7 @@ export default class MainMenu{
   constructor(mainWindow) {
     this.mainWindow = mainWindow
     this.devMenu = {
-      label:"developer tools",
+      label:"Developer tools",
       submenu:[{
         label:"toggle devtools",
         accelerator:"CmdOrCtrl+I",
@@ -16,8 +16,131 @@ export default class MainMenu{
         role:"reload"
       }]
     }
+    this.viewMenu = {
+      label:"View",
+      after: ['1'],
+      submenu:[
+        {
+          label:"themes",
+          submenu:[
+            {
+              label:"default",
+              type:"radio",
+              checked:true,
+              click:() => {
+                this.changeTheme("default")
+              }
+            },
+            {
+              label:"eye",
+              type:"radio",
+              click:() => {
+                this.changeTheme("eye")
+              }
+            },
+            {
+              label:"dark",
+              type:"radio",
+              click:() => {
+                this.changeTheme("dark")
+              }
+            },
+            {
+              label:"gold",
+              type:"radio",
+              click:() => {
+                this.changeTheme("gold")
+              }
+            }
+          ]
+        },
+        {
+          label:"Font",
+          submenu:[
+            {
+              label:"宋体",
+              type:"radio",
+              checked:true,
+              click:() => {
+                this.changeFont("STSong")
+              }
+            },
+            {
+              label:"黑体",
+              type:"radio",
+              click:() => {
+                this.changeFont("STHeiti")
+              }
+            },
+            {
+              label:"楷体",
+              type:"radio",
+              click:() => {
+                this.changeFont("STKaiti")
+              }
+            },
+            {
+              label:"苹方",
+              type:"radio",
+              click:() => {
+                this.changeFont("sans-serif")
+              }
+            }
+          ]
+        },
+        {
+          label:"zoom in",
+          accelerator:"CmdOrCtrl+Plus",
+          click:() => {
+            this.zoom("zoomIn")
+          }
+        },
+        {
+          label:"zoom out",
+          accelerator:"CmdOrCtrl+-",
+          click:() => {
+            this.zoom("zoomOut")
+          }
+        },
+        {
+          type:"separator"
+        },
+        {
+          label:"bookmark",
+          accelerator:"CmdOrCtrl+B",
+          click:() => {
+            this.bookmark()
+          }
+        },
+        {
+          label:"list bookmarks",
+          accelerator:"CmdOrCtrl+L",
+          click:() => {
+            this.list("bookmark")
+          }
+        },
+        {
+          type:"separator"
+        },
+        {
+          label:"directory",
+          accelerator:"CmdOrCtrl+T",
+          click:() => {
+            this.list("dir")
+          }
+        },
+        {
+          label:"find...",
+          accelerator:"CmdOrCtrl+F",
+          click:() => {
+            this.find()
+          }
+        }
+      ]
+    }
     this.template = [
       {
+        id: '1',
         label:"File",
         submenu:[
           {
@@ -44,123 +167,16 @@ export default class MainMenu{
         ]
       },
       {
-        label:"View",
+        label:"Window",
         submenu:[
           {
-            label:"themes",
-            submenu:[
-              {
-                label:"default",
-                type:"radio",
-                checked:true,
-                click:() => {
-                  this.changeTheme("default")
-                }
-              },
-              {
-                label:"eye",
-                type:"radio",
-                click:() => {
-                  this.changeTheme("eye")
-                }
-              },
-              {
-                label:"dark",
-                type:"radio",
-                click:() => {
-                  this.changeTheme("dark")
-                }
-              },
-              {
-                label:"gold",
-                type:"radio",
-                click:() => {
-                  this.changeTheme("gold")
-                }
-              }
-            ]
+            role:"Minimize"
           },
           {
-            label:"Font",
-            submenu:[
-              {
-                label:"宋体",
-                type:"radio",
-                checked:true,
-                click:() => {
-                  this.changeFont("STSong")
-                }
-              },
-              {
-                label:"黑体",
-                type:"radio",
-                click:() => {
-                  this.changeFont("STHeiti")
-                }
-              },
-              {
-                label:"楷体",
-                type:"radio",
-                click:() => {
-                  this.changeFont("STKaiti")
-                }
-              },
-              {
-                label:"苹方",
-                type:"radio",
-                click:() => {
-                  this.changeFont("sans-serif")
-                }
-              }
-            ]
-          },
-          {
-            label:"zoom in",
-            accelerator:"CmdOrCtrl+Plus",
-            click:() => {
-              this.zoom("zoomIn")
-            }
-          },
-          {
-            label:"zoom out",
-            accelerator:"CmdOrCtrl+-",
-            click:() => {
-              this.zoom("zoomOut")
-            }
+            role:"zoom"
           },
           {
             type:"separator"
-          },
-          {
-            label:"bookmark",
-            accelerator:"CmdOrCtrl+B",
-            click:() => {
-              this.bookmark()
-            }
-          },
-          {
-            label:"list bookmarks",
-            accelerator:"CmdOrCtrl+L",
-            click:() => {
-              this.list("bookmark")
-            }
-          },
-          {
-            type:"separator"
-          },
-          {
-            label:"directory",
-            accelerator:"CmdOrCtrl+T",
-            click:() => {
-              this.list("dir")
-            }
-          },
-          {
-            label:"find...",
-            accelerator:"CmdOrCtrl+F",
-            click:() => {
-              this.find()
-            }
           },
           {
             role:"toggleFullScreen"
@@ -193,8 +209,17 @@ export default class MainMenu{
       }, (files) => {
           if (files){
             this.mainWindow.webContents.send("openbook",files[0])
+            this.appendMenu()
           }
       })
+  }
+
+  appendMenu(){
+    if(this.template.indexOf(this.viewMenu)==-1){
+      this.template.splice(1,0,this.viewMenu)
+      const menu = Menu.buildFromTemplate(this.template)
+      Menu.setApplicationMenu(menu)
+    }
   }
 
   zoom(action){
