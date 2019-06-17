@@ -10,9 +10,9 @@ export default class Reader {
   }
 
   createBook(path,dom,progress) {
-    /*if(this.rendition){
-      this.rendition.clear()
-    }*/
+    if(this.book){
+      this.book.destroy()
+    }
     this.book = ePub(path)
     this.rendition = this.book.renderTo(dom, {width: "100%", height: "100%"})
     this.themes = this.rendition.themes
@@ -82,7 +82,7 @@ export default class Reader {
   }
 
   showRightClickMenu(text){
-	   ipcRenderer.send('sigShowRightClickMenu',text)
+	   ipcRenderer.send('rightClick',text)
   }
 
   prev(){

@@ -21,7 +21,7 @@ const createWindow = async () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`);
   // Open the DevTools.
   if (isDevMode) {
     await installExtension(VUEJS_DEVTOOLS);
@@ -53,7 +53,7 @@ ipcMain.on('openbook',(event)=>{
   mainMenu.openbook()
 })
 
-ipcMain.on('sigShowRightClickMenu', (event,data) => {
+ipcMain.on('rightClick', (event,data) => {
 	//! 生成菜单
   mainMenu.createPopupMenu(event,data)
 })

@@ -1,14 +1,14 @@
 <template>
   <div :class="canTool?'toolbarShow':'toolbar'">
     <ul :class="canTool?'boxShow':'box'">
-     <li><img src="assets/book.png"/></li>
-     <li @click="list('dir')"><img src="assets/dir.png"/></li>
-     <li @click="list('note')"><img src="assets/note.png"/></li>
+     <li @click="openbook()"><img src="../assets/book.png"/></li>
+     <li @click="list('dir')"><img src="../assets/dir.png"/></li>
+     <li @click="list('note')"><img src="../assets/note.png"/></li>
 
-     <li @click="canTheme=false;canSearch=!canSearch"><img src="assets/search.png"/></li>
-     <li @click="canSearch=false;canTheme=!canTheme"><img src="assets/font.png"/></li>
-     <li @click="bookmark()"><img src="assets/bookmark.png"/></li>
-     <li @click="list('bookmark')" class="arrow"><img src="assets/arrow_down.png"/></li>
+     <li @click="canTheme=false;canSearch=!canSearch"><img src="../assets/search.png"/></li>
+     <li @click="canSearch=false;canTheme=!canTheme"><img src="../assets/font.png"/></li>
+     <li @click="bookmark()"><img src="../assets/bookmark.png"/></li>
+     <li @click="list('bookmark')" class="arrow"><img src="../assets/arrow_down.png"/></li>
 
     <transition name="search">
       <div v-if="canSearch" class="search">
@@ -16,8 +16,8 @@
       </div>
       <div v-if="canTheme" class="themeSwap">
         <ul class="zoom">
-          <li @click="zoomOut()"><img src="assets/zoomOut.png"/></li>
-          <li @click="zoomIn()"><img src="assets/zoomIn.png"/></li>
+          <li @click="zoomOut()"><img src="../assets/zoomOut.png"/></li>
+          <li @click="zoomIn()"><img src="../assets/zoomIn.png"/></li>
         </ul>
         <div class="theme">
           <span class="default" @click="theme('default')"><span v-if="sel==1" class="correct-dark">√</span></span>
@@ -53,6 +53,9 @@ export default {
   methods:{
     submit(e){
       this.$emit('submit',e,this.keyword)
+    },
+    openbook(){
+      this.$emit('openbook')
     },
     list(name){
       this.$emit('list',name)
