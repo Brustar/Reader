@@ -4,8 +4,11 @@
     <toolbar ref="toolbar" @bookmark="bookmark" @list="list" @submit="submit" @openbook="open"
     @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook"></toolbar>
 
-    <div id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
+    <div v-if="!ispdf" id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
         <span class="tips"><img src="../assets/document.png" /> Double click or drag file here.</span>
+    </div>
+    <div v-if="ispdf" class="pdfcontainer">
+      <canvas id="the-canvas" class="canvas"></canvas>
     </div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="../assets/left.png"/></div>
     <div class="rightbar" @click="next"><img class="rightImg" src="../assets/right.png"/></div>
@@ -40,12 +43,11 @@ export default {
       bookmarked:false,
       show:false,
       cannote:false,
-      canbook:false
+      canbook:false,
+      ispdf:false,
     }
   },
   mounted:function(){
-    this.book = new Reader()
-    this.pdf = new pdfReader()
     window.addEventListener('keyup', (e)=>{
       if(e.key == "ArrowLeft"){
         this.prev()
@@ -85,16 +87,19 @@ export default {
     openbook:function(p){
       if(path.extname(p)==".epub")
       {
+        this.book = new Reader()
         this.book.createBook(p,"container",(percent,bookmarked)=>{
           this.percentage = percent
           this.bookmarked = bookmarked
           this.canbook = true
         })
+        this.ispdf = false
       }
       if(path.extname(p)==".pdf")
       {
-        alert("dev...")
-        this.pdf.openPdf(p)
+        this.book = new pdfReader()
+        this.book.openPdf(p)
+        this.ispdf = true
       }
       ipcRenderer.send('appendmenu')
     },

@@ -127,6 +127,16 @@ input{
   background-position: 5px 2px;
 }
 
+.pdfcontainer{
+  overflow: auto;
+  text-align: center;
+}
+
+.canvas{
+  width:auto;
+  height: 200%;
+}
+
 .book{
   width:80%;
   height: 80%;
