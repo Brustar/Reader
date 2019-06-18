@@ -4,6 +4,7 @@ const electron = require('electron')
 export default class pdfReader {
   constructor() {
     this.pageNum = 1
+    this.scale = 2.0
   }
 
   openPdf(url){
@@ -11,6 +12,9 @@ export default class pdfReader {
     pdf.getDocument(url).then((doc) => {
       this.canvas = document.querySelector("#can")
       this.doc = doc
+      /*for (var i = 0; i < doc.numPages; i++) {
+        this.renderPage(i)
+      }*/
       this.renderPage()
     })
 
@@ -19,7 +23,7 @@ export default class pdfReader {
   renderPage() {
     this.pageRendering = true
     this.doc.getPage(this.pageNum).then(page => {
-      var viewport = page.getViewport(2.0)
+      var viewport = page.getViewport(this.scale)
       var h = electron.screen.getPrimaryDisplay().workAreaSize.height * 2
       this.canvas.height = h
       this.canvas.width = h*viewport.width/viewport.height
@@ -35,7 +39,7 @@ export default class pdfReader {
         if (this.pageNumPending) {
           this.pageNum = this.pageNumPending
           this.renderPage();
-          this.pageNumPending = null;
+          this.pageNumPending = undefined;
         }
       })
     })
@@ -66,10 +70,12 @@ export default class pdfReader {
   }
 
   zoomIn(){
-
+    this.scale += 0.1;
+    this.queueRenderPage(this.pageNum);
   }
 
   zoomOut(){
-
+    this.scale -= 0.1;
+    this.queueRenderPage(this.pageNum);
   }
 }
