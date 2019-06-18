@@ -2,7 +2,7 @@
   <div>
 
     <toolbar ref="toolbar" @bookmark="bookmark" @list="list" @submit="submit" @openbook="open"
-    @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook"></toolbar>
+    @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook" :ispdf="ispdf"></toolbar>
 
     <div v-if="!ispdf" id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
         <span class="tips"><img src="../assets/document.png" /> Double click or drag file here.</span>

@@ -2,16 +2,16 @@
   <div :class="canTool?'toolbarShow':'toolbar'">
     <ul :class="canTool?'boxShow':'box'">
      <li @click="openbook()"><img src="../assets/book.png"/></li>
-     <li v-if="canbook" @click="list('dir')"><img src="../assets/dir.png"/></li>
-     <li v-if="canbook" @click="list('note')"><img src="../assets/note.png"/></li>
+     <li v-if="canbook && !ispdf" @click="list('dir')"><img src="../assets/dir.png"/></li>
+     <li v-if="canbook && !ispdf" @click="list('note')"><img src="../assets/note.png"/></li>
 
-     <li v-if="canbook" @click="canTheme=false;canSearch=!canSearch"><img src="../assets/search.png"/></li>
-     <li v-if="canbook" @click="canSearch=false;canTheme=!canTheme"><img src="../assets/font.png"/></li>
-     <li v-if="canbook" @click="bookmark()"><img src="../assets/bookmark.png"/></li>
-     <li v-if="canbook" @click="list('bookmark')" class="arrow"><img src="../assets/arrow_down.png"/></li>
+     <li v-if="canbook && !ispdf" @click="canTheme=false;canSearch=!canSearch"><img src="../assets/search.png"/></li>
+     <li v-if="canbook && !ispdf" @click="canSearch=false;canTheme=!canTheme"><img src="../assets/font.png"/></li>
+     <li v-if="canbook && !ispdf" @click="bookmark()"><img src="../assets/bookmark.png"/></li>
+     <li v-if="canbook && !ispdf" @click="list('bookmark')" class="arrow"><img src="../assets/arrow_down.png"/></li>
 
-     <li @click="zoomIn()"><img src="../assets/zoom_in.png"/></li>
-     <li @click="zoomOut()"><img src="../assets/zoom_out.png"/></li>
+     <li @click="zoomIn()" v-if="ispdf"><img src="../assets/zoom_in.png"/></li>
+     <li @click="zoomOut()" v-if="ispdf"><img src="../assets/zoom_out.png"/></li>
 
     <transition name="search">
       <div v-if="canSearch" class="search">
@@ -43,7 +43,7 @@
 <script>
 export default {
   name: 'toolbar',
-  props: ['canbook'],
+  props: ['canbook','ispdf'],
   data() {
     return {
       canSearch:false,
