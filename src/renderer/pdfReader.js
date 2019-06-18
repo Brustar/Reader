@@ -16,9 +16,6 @@ export default class pdfReader {
 
   renderPage() {
     var container = document.querySelector(".pdfcontainer")
-    while(container.hasChildNodes()){
-      container.removeChild(container.lastChild)
-    }
     this.pageRendering = true
     for (var i = 1; i <= this.doc.numPages; i++) {
       this.doc.getPage(i).then(page => {
@@ -49,19 +46,11 @@ export default class pdfReader {
   }
 
   next(){
-    /*if (this.pageNum >= this.doc.numPages) {
-       return
-    }
-    this.pageNum++
-    this.queueRenderPage(this.pageNum)*/
+
   }
 
   prev(){
-    /*if (this.pageNum <= 1) {
-      return
-    }
-    this.pageNum--
-    this.queueRenderPage(this.pageNum)*/
+
   }
 
   queueRenderPage() {

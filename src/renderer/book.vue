@@ -83,7 +83,18 @@ export default {
     dstart:function(e){
       e.preventDefault()
     },
+
+    destoryUI:function(){
+      var container = document.querySelector(".pdfcontainer")
+      if(container){
+        while(container.hasChildNodes()){
+          container.removeChild(container.lastChild)
+        }
+      }
+    },
+
     openbook:function(p){
+      this.destoryUI()
       if(path.extname(p)==".epub")
       {
         this.book = new Reader()
