@@ -1,5 +1,6 @@
 const pdf = require('pdfjs-dist')
 const electron = require('electron')
+const path = require('path')
 
 export default class pdfReader {
   constructor() {
@@ -8,6 +9,7 @@ export default class pdfReader {
 
   openPdf(url){
     pdf.GlobalWorkerOptions.workerSrc = '${__dirname}/../../../node_modules/pdfjs-dist/build/pdf.worker.js'
+    document.title = path.basename(url)
     pdf.getDocument(url).then((doc) => {
       this.doc = doc
       this.renderPage()
@@ -46,11 +48,14 @@ export default class pdfReader {
   }
 
   next(){
-
   }
 
   prev(){
+  }
 
+  process(y){
+    var h = electron.screen.getPrimaryDisplay().workAreaSize.height * 2
+    return {page:Math.round(y/h)+1,total:this.doc.numPages}
   }
 
   queueRenderPage() {

@@ -14,7 +14,7 @@
 
     <leftbar :show="show" :title="title" :dirs="dirs" @nav="nav"></leftbar>
 
-    <statubar :percentage="percentage" :bookmarked="bookmarked"></statubar>
+    <statubar :percentage="percentage" :bookmarked="bookmarked" :ispdf="ispdf" :page="page" :total="total"></statubar>
     <notebox v-if="cannote" @donote="donote"></notebox>
   </div>
 </template>
@@ -44,9 +44,19 @@ export default {
       cannote:false,
       canbook:false,
       ispdf:false,
+      total:0,
+      page:0
     }
   },
   mounted:function(){
+    window.addEventListener('scroll', () => {
+      if(this.ispdf){
+        var obj = this.book.process(window.scrollY)
+        console.log(obj)
+        this.page = obj.page
+        this.total = obj.total
+      }
+    })
     window.addEventListener('keyup', (e)=>{
       if(e.key == "ArrowLeft"){
         this.prev()
