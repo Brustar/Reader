@@ -8,7 +8,6 @@
         <span class="tips"><img src="../assets/document.png" /> Double click or drag file here.</span>
     </div>
     <div v-if="ispdf" class="pdfcontainer">
-      <canvas id="can" class="canvas"></canvas>
     </div>
     <div class="leftbar" @click="prev"><img class="leftImg" src="../assets/left.png"/></div>
     <div class="rightbar" @click="next"><img class="rightImg" src="../assets/right.png"/></div>

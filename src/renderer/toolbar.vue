@@ -10,6 +10,9 @@
      <li v-if="canbook" @click="bookmark()"><img src="../assets/bookmark.png"/></li>
      <li v-if="canbook" @click="list('bookmark')" class="arrow"><img src="../assets/arrow_down.png"/></li>
 
+     <li @click="zoomIn()"><img src="../assets/zoom_in.png"/></li>
+     <li @click="zoomOut()"><img src="../assets/zoom_out.png"/></li>
+
     <transition name="search">
       <div v-if="canSearch" class="search">
         <input type="text" autofocus="autofocus" v-model="keyword" @keydown="submit($event)" placeholder="请输入关键字"/>
