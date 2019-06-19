@@ -8,6 +8,9 @@ ul{
 li{
   padding: 12px;
 }
+li:hover{
+  opacity: 0.8;
+}
 
 .status{
   width:100%;

@@ -60,9 +60,10 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.1",
-    "url-loader": "^0.5.9",
+    "file-loader": "^1.1.4",
     "vue-loader": "^13.3.0",
-    "vue-style-loader": "^3.0.1",
+    "style-loader": "^0.23.1",
+    "vueify-insert-css": "^1.0.0",
     "electron-forge": "^5.2.4",
     "electron-prebuilt-compile": "4.0.0"
   }

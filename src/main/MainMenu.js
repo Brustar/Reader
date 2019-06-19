@@ -1,5 +1,6 @@
 
-import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow , nativeImage } from 'electron'
+import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow } from 'electron'
+const path = require('path')
 
 export default class MainMenu{
   constructor(mainWindow) {
@@ -15,6 +16,9 @@ export default class MainMenu{
       },{
         role:"reload"
       }]
+    }
+    this.editMenu = {
+      role:"editMenu"
     }
     this.viewMenu = {
       label:"View",
@@ -144,7 +148,6 @@ export default class MainMenu{
         label:"File",
         submenu:[
           {
-            label:"about us",
             role: "about"
           },
           {
@@ -208,17 +211,19 @@ export default class MainMenu{
           filters:[{ name: 'Books', extensions: ['epub', 'pdf', 'txt'] }]
       }, (files) => {
           if (files){
-            this.mainWindow.webContents.send("openbook",files[0])
-            this.appendMenu()
+            this.file = files[0]
+            this.mainWindow.webContents.send("openbook",this.file)
           }
       })
   }
 
   appendMenu(){
-    if(this.template.indexOf(this.viewMenu)==-1){
-      this.template.splice(1,0,this.viewMenu)
-      const menu = Menu.buildFromTemplate(this.template)
-      Menu.setApplicationMenu(menu)
+    var ispdf = path.extname(this.file)==".pdf"
+    var menu = ispdf?this.editMenu:this.viewMenu
+    if(this.template.indexOf(menu)==-1){
+      this.template.splice(1,0,menu)
+      const m = Menu.buildFromTemplate(this.template)
+      Menu.setApplicationMenu(m)
     }
   }
 
