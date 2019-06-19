@@ -17,9 +17,6 @@ export default class MainMenu{
         role:"reload"
       }]
     }
-    this.editMenu = {
-      role:"editMenu"
-    }
     this.viewMenu = {
       label:"View",
       after: ['1'],
@@ -144,7 +141,6 @@ export default class MainMenu{
     }
     this.template = [
       {
-        id: '1',
         label:"File",
         submenu:[
           {
@@ -168,6 +164,10 @@ export default class MainMenu{
             }
           }
         ]
+      },
+      {
+        id: '1',
+        role:"editMenu"
       },
       {
         label:"Window",
@@ -218,12 +218,11 @@ export default class MainMenu{
   }
 
   appendMenu(){
-    var ispdf = path.extname(this.file)==".pdf"
-    var menu = ispdf?this.editMenu:this.viewMenu
-    if(this.template.indexOf(menu)==-1){
-      this.template.splice(1,0,menu)
-      const m = Menu.buildFromTemplate(this.template)
-      Menu.setApplicationMenu(m)
+    var isepub = path.extname(this.file)==".epub"
+    if(isepub && this.template.indexOf(this.viewMenu)==-1){
+      this.template.splice(1,0,this.viewMenu)
+      const menu = Menu.buildFromTemplate(this.template)
+      Menu.setApplicationMenu(menu)
     }
   }
 
