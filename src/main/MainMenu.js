@@ -208,7 +208,7 @@ export default class MainMenu{
   openbook(){
     dialog.showOpenDialog({
           properties: ['openFile'],
-          filters:[{ name: 'Books', extensions: ['epub', 'pdf', 'txt'] }]
+          filters:[{ name: 'Books', extensions: ['epub', 'pdf'] }]
       }, (files) => {
           if (files){
             this.file = files[0]
@@ -255,7 +255,6 @@ export default class MainMenu{
         this.mainWindow.webContents.send("underline",data.range)
     }}] }))
     menu.append(new MenuItem({ label: 'add comment',click:() => {
-        //shell.openExternal('https://www.baidu.com')
         this.mainWindow.webContents.send("comment",data.range)
     } }))
   	menu.append(new MenuItem({ type: 'separator' }))
