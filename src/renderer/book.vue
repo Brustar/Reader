@@ -9,8 +9,8 @@
     </div>
     <div v-if="ispdf" class="pdfcontainer">
     </div>
-    <div class="leftbar" @click="prev"><img class="leftImg" src="../assets/left.png"/></div>
-    <div class="rightbar" @click="next"><img class="rightImg" src="../assets/right.png"/></div>
+    <div v-if="!ispdf" class="leftbar" @click="prev"><img class="leftImg" src="../assets/left.png"/></div>
+    <div v-if="!ispdf" class="rightbar" @click="next"><img class="rightImg" src="../assets/right.png"/></div>
 
     <leftbar :show="show" :title="title" :dirs="dirs" @nav="nav"></leftbar>
 
@@ -62,12 +62,6 @@ export default {
       }
       if(e.key == "ArrowRight"){
         this.next()
-      }
-      if(e.key == "ArrowUp"){
-        this.zoomIn()
-      }
-      if(e.key == "ArrowDown"){
-        this.zoomOut()
       }
     }, true)
     this.actions = ["openbook","underline","keynote","comment","zoomIn","zoomOut","list","bookmark","find","changeTheme","changeFont","bookClick"]
