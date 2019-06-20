@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <toolbar ref="toolbar" @bookmark="bookmark" @list="list" @submit="submit" @openbook="open"
+    <toolbar ref="toolbar" @bookmark="bookmark" @list="list" @search="dosearch" @openbook="open"
     @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook" :ispdf="ispdf"></toolbar>
 
     <div v-if="!ispdf" id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
@@ -165,14 +165,13 @@ export default {
       this.book.underline(range)
     },
     comment(range){
-      //this.book.comment(range)
       this.currentcfi=range
       this.cannote=true
     },
     keynote(obj){
       this.book.keynote(obj)
     },
-    submit(e,key){
+    dosearch(e,key){
       var evt = window.event || e
       if (evt.keyCode == 13){
         this.list("search",key)
