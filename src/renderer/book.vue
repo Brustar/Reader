@@ -64,7 +64,8 @@ export default {
         this.next()
       }
     }, true)
-    this.actions = ["openbook","underline","keynote","comment","zoomIn","zoomOut","list","bookmark","find","changeTheme","changeFont","bookClick"]
+    this.actions = ["openbook","underline","keynote","comment","zoomIn","zoomOut","list",
+    "bookmark","find","changeTheme","changeFont","bookClick","efc","lfc"]
     this.listener()
   },
   methods:{
@@ -199,6 +200,13 @@ export default {
     donote(note){
       this.book.donote(note,this.currentcfi)
       this.cannote = false
+    },
+    efc(){
+      if(ispdf)
+        document.body.style.background = "#000"
+    },
+    lfc(){
+      document.body.style.background = "#fff"
     }
   }
 }
