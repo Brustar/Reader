@@ -211,3 +211,66 @@ export default {
   }
 }
 </script>
+
+<style>
+.pdfcontainer{
+  overflow: auto;
+  text-align: center;
+}
+.tips{
+  text-align: center;
+  line-height:600px;
+  color: grey;
+  width:80%;
+  height:80%;
+  position:fixed;
+}
+.book{
+  width:80%;
+  height: 80%;
+  position: fixed;
+  left: 10%;
+  top: 10%;
+}
+.leftbar{
+  width:10%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  text-align: center;
+  display:inline-block;
+}
+.rightbar{
+  z-index: 9998;
+  position: fixed;
+  width: 10%;
+  height: 100%;
+  right: 8px;
+  top: 8px;
+  display:inline-block;
+}
+
+.leftbar:hover .leftImg{
+  display:block;
+}
+
+.rightbar:hover .rightImg{
+  display:block;
+}
+
+.leftImg{
+  position:fixed;
+  top:50%;
+  padding-left: 5%;
+  display:none;
+}
+
+.rightImg{
+  position:fixed;
+  top:50%;
+  padding-left: 5%;
+  display:none;
+}
+</style>

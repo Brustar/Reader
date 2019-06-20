@@ -14,9 +14,7 @@
      <li @click="zoomOut()" v-if="ispdf"><img src="../assets/zoom_out.png"/></li>
 
     <transition name="search">
-      <div v-if="canSearch" class="search">
-        <input type="text" autofocus="autofocus" v-model="keyword" @keydown="submit($event)" placeholder="请输入关键字"/>
-      </div>
+      <searchbar v-if="canSearch" @search="submit"></searchbar>
       <div v-if="canTheme" class="themeSwap">
         <ul class="zoom">
           <li @click="zoomOut()"><img src="../assets/zoomOut.png"/></li>
@@ -41,8 +39,12 @@
 </template>
 
 <script>
+import searchbar from "./searchbar"
 export default {
   name: 'toolbar',
+  components:{
+		searchbar
+	},
   props: ['canbook','ispdf'],
   data() {
     return {
@@ -50,13 +52,13 @@ export default {
       canTheme:false,
       canTool:false,
       sel:0,
-      selFont:0,
-      keyword:""
+      selFont:0
     }
   },
   methods:{
-    submit(e){
-      this.$emit('submit',e,this.keyword)
+    submit(e,key){
+      console.log(key)
+      this.$emit('submit',e,key)
     },
     openbook(){
       this.$emit('openbook')
@@ -106,3 +108,88 @@ export default {
   }
 }
 </script>
+
+<style>
+.toolbar{
+  z-index: 9999;
+  width:100%;
+  height:30px;
+  position:fixed;
+  top:0;
+  display:inline-block;
+}
+.toolbar:hover{
+  background:#eee;
+}
+.toolbar:hover .box{
+  display:block;
+}
+.toolbarShow{
+  z-index: 9999;
+  width:100%;
+  height:30px;
+  position:fixed;
+  top:0;
+  display:block;
+  background:#eee;
+}
+.box>li{padding:0; margin:0;list-style:none;text-align: center;}
+.box{ width:250px;margin-left: 0px;display:none;}
+.box li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
+.boxShow>li{padding:0; margin:0;list-style:none;text-align: center;}
+.boxShow li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
+.boxShow{ width:186px;margin-left: 0px;display:block; }
+
+.themeSwap{
+  left: 0px;
+  padding: 10px;
+  height:300px;
+  width:200px;
+  top:30px;
+  position: fixed;
+  background: #eee;
+  text-align: center;
+  border-radius:5px;
+}
+
+.themeSwap>.zoom>li{
+  float: left;
+  height: 40px;
+  width: 45%;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.font{
+  position:fixed;
+  left:50px;
+  margin-top: 20px;
+}
+
+.theme{
+  margin-top: 20px;
+}
+
+.correct{
+  display:block;color:#FFF;height:30px;line-height:30px;text-align:center;font-size:18px;
+}
+
+.correct-dark{
+  display:block;height:30px;line-height:30px;text-align:center;font-size:18px;
+}
+.arrow{
+  position:fixed;
+  left: 172px;
+  top:5px;
+}
+.song{font-family: "STSong";padding: 12px;}
+.hei{font-family: "STHeiti";padding: 12px;}
+.kai{font-family: "STKaiti";padding: 12px;}
+.apple{font-family: "sans-serif";padding: 12px;}
+
+.default{margin-right: 10px;border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #fff;}
+.gold{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #f1ece2;}
+.eye{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #ceeaba}
+.dark{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #000;}
+
+</style>

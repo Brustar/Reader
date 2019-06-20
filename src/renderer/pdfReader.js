@@ -2,6 +2,7 @@ const pdf = require('pdfjs-dist')
 const electron = require('electron')
 const path = require('path')
 import { TextLayerBuilder } from 'pdfjs-dist/web/pdf_viewer'
+
 //import 'pdfjs-dist/web/pdf_viewer.css'
 
 export default class pdfReader {

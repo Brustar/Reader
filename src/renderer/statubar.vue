@@ -13,3 +13,22 @@ export default {
   props: ['percentage','bookmarked','ispdf','page','total']
 }
 </script>
+
+<style>
+.status{
+  width:100%;
+  height:30px;
+  position:fixed;
+  z-index: 9999;
+  text-align: center;
+  bottom: 0;
+  font-size: 12px;
+  color: gray;
+  font-weight:bold;
+  font-family: sans-serif;
+}
+.bookmark{
+  float: right;
+  padding-right: 5%;
+}
+</style>
