@@ -5,7 +5,7 @@
     @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook" :ispdf="ispdf"></toolbar>
 
     <div v-if="!ispdf" id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
-        <span class="tips"><img src="../assets/document.png" /> Double click or drag file here.</span>
+        <span class="tips"><img @click="open" src="../assets/document.png" /> Double click or drag file here.</span>
     </div>
     <div v-if="ispdf" class="pdfcontainer">
     </div>

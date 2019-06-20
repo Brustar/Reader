@@ -5,7 +5,7 @@ body{
 li{
   padding: 12px;
 }
-li:hover{
+li:hover,img:hover{
   opacity: 0.8;
 }
 ul{ list-style-type:none;padding:0; margin:0; overflow:hidden;}

@@ -52,6 +52,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "epubjs": "^0.3.84",
     "pdfjs-dist": "^2.0.943",
+    "vueify": "^9.4.1",
     "vue": "^2.6.10",
     "vue-router": "^2.3.1"
   },
@@ -68,7 +69,6 @@
     "autoprefixer": "^7.1.2",
     "postcss-import": "^11.0.0",
     "postcss-url": "^7.2.1",
-    "vueify": "^9.4.1",
     "electron-prebuilt-compile": "4.0.0"
   }
 }
