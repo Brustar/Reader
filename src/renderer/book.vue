@@ -112,7 +112,10 @@ export default {
       if(path.extname(p)==".pdf")
       {
         this.book = new pdfReader()
-        this.book.openPdf(p)
+        this.book.openPdf(p,(pagenum)=>{
+          this.page = 1
+          this.total = pagenum
+        })
         this.ispdf = true
       }
       ipcRenderer.send('appendmenu')

@@ -9,12 +9,13 @@ export default class pdfReader {
     this.scale = 2.0
   }
 
-  openPdf(url){
+  openPdf(url,progress){
     pdf.GlobalWorkerOptions.workerSrc = '${__dirname}/../../../node_modules/pdfjs-dist/build/pdf.worker.js'
     document.title = path.basename(url)
     pdf.getDocument(url).then((doc) => {
       this.doc = doc
       this.renderPage()
+      progress(doc.numPages)
     })
   }
 
@@ -70,7 +71,9 @@ export default class pdfReader {
 
   process(y){
     var h = electron.screen.getPrimaryDisplay().workAreaSize.height * this.scale
-    return {page:Math.round(y/h)+1,total:this.doc.numPages}
+    var page = Math.round(y/h)+1
+    if(page>this.doc.numPages) page = this.doc.numPages
+    return {page:page,total:this.doc.numPages}
   }
 
   zoomIn(){
