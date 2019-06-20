@@ -2,7 +2,6 @@ const pdf = require('pdfjs-dist')
 const electron = require('electron')
 const path = require('path')
 import { TextLayerBuilder } from 'pdfjs-dist/web/pdf_viewer'
-
 //import 'pdfjs-dist/web/pdf_viewer.css'
 
 export default class pdfReader {
@@ -21,7 +20,9 @@ export default class pdfReader {
 
   renderPage() {
     var container = document.querySelector(".pdfcontainer")
-    this.pageRendering = true
+    while(container.hasChildNodes()){
+      container.removeChild(container.lastChild)
+    }
     for (var i = 1; i <= this.doc.numPages; i++) {
       this.doc.getPage(i).then(page => {
         var pageDiv = document.createElement('div')
@@ -39,9 +40,7 @@ export default class pdfReader {
          canvasContext: ctx,
          viewport: viewport
         }
-        pageDiv.appendChild(canvas);
-
-        //var renderTask =
+        pageDiv.appendChild(canvas)
         page.render(renderContext).then(() => {
             return page.getTextContent()
         }).then((textContent) => {
@@ -50,26 +49,15 @@ export default class pdfReader {
             textLayerDiv.setAttribute('class', 'textLayer')
             // 将文本图层div添加至每页pdf的div中
             pageDiv.appendChild(textLayerDiv)
-
             // 创建新的TextLayerBuilder实例
             var textLayer = new TextLayerBuilder({
                 textLayerDiv: textLayerDiv,
                 pageIndex: page.pageIndex,
                 viewport: viewport
             })
-
             textLayer.setTextContent(textContent)
-
             textLayer.render()
         })
-        /*renderTask.promise.then(() => {
-          this.pageRendering = false;
-          if (this.pageNumPending) {
-            this.pageNum = this.pageNumPending
-            this.renderPage();
-            this.pageNumPending = undefined;
-          }
-        })*/
       })
     }
   }
@@ -81,25 +69,17 @@ export default class pdfReader {
   }
 
   process(y){
-    var h = electron.screen.getPrimaryDisplay().workAreaSize.height * 2
+    var h = electron.screen.getPrimaryDisplay().workAreaSize.height * this.scale
     return {page:Math.round(y/h)+1,total:this.doc.numPages}
-  }
-
-  queueRenderPage() {
-    if (this.pageRendering) {
-      this.pageNumPending = 1
-    } else {
-      this.renderPage()
-    }
   }
 
   zoomIn(){
     this.scale += 0.1;
-    this.queueRenderPage();
+    this.renderPage();
   }
 
   zoomOut(){
     this.scale -= 0.1;
-    this.queueRenderPage();
+    this.renderPage();
   }
 }

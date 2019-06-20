@@ -52,7 +52,6 @@ export default {
     window.addEventListener('scroll', () => {
       if(this.ispdf){
         var obj = this.book.process(window.scrollY)
-        console.log(obj)
         this.page = obj.page
         this.total = obj.total
       }

@@ -41,7 +41,6 @@ export default {
   },
   methods:{
     search(e,key){
-      console.log(key)
       this.$emit('search',e,key)
     },
     openbook(){
@@ -123,7 +122,6 @@ export default {
 .boxShow>li{padding:0; margin:0;list-style:none;text-align: center;}
 .boxShow li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
 .boxShow{ width:186px;margin-left: 0px;display:block; }
-
 
 .arrow{
   position:fixed;
