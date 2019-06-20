@@ -205,7 +205,7 @@ export default {
       this.cannote = false
     },
     efc(){
-      if(ispdf)
+      if(this.ispdf)
         document.body.style.background = "#000"
     },
     lfc(){
