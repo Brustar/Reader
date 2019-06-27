@@ -103,7 +103,7 @@ export default class MainMenu{
           }
         },
         {
-          label:menu.zoomout,
+          label:this.menu.zoomout,
           accelerator:"CmdOrCtrl+-",
           click:() => {
             this.zoom("zoomOut")
@@ -120,7 +120,7 @@ export default class MainMenu{
           }
         },
         {
-          label:menu.bookmarks,
+          label:this.menu.bookmarks,
           accelerator:"CmdOrCtrl+L",
           click:() => {
             this.list("bookmark")
