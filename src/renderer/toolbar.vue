@@ -1,6 +1,6 @@
 <template>
-  <div :class="canTool?'toolbarShow':'toolbar'">
-    <ul :class="canTool?'boxShow':'box'">
+  <div :class="canTool?'toolbar tshow':'toolbar thidden'">
+    <ul :class="canTool?'box show':'box hidden'">
      <li @click="openbook()"><img src="../assets/book.png"/></li>
      <li v-if="canbook && !ispdf" @click="list('dir')"><img src="../assets/dir.png"/></li>
      <li v-if="canbook && !ispdf" @click="list('note')"><img src="../assets/note.png"/></li>
@@ -99,6 +99,8 @@ export default {
   height:30px;
   position:fixed;
   top:0;
+}
+.thidden{
   display:inline-block;
 }
 .toolbar:hover{
@@ -107,21 +109,15 @@ export default {
 .toolbar:hover .box{
   display:block;
 }
-.toolbarShow{
-  z-index: 9999;
-  width:100%;
-  height:30px;
-  position:fixed;
-  top:0;
+.tshow{
   display:block;
   background:#eee;
 }
 .box>li{padding:0; margin:0;list-style:none;text-align: center;}
-.box{ width:250px;margin-left: 0px;display:none;}
+.box{ width:250px;margin-left: 0px;}
 .box li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
-.boxShow>li{padding:0; margin:0;list-style:none;text-align: center;}
-.boxShow li{ float:left; width:21px; height:16px; margin-right:10px;margin-top:7px;}
-.boxShow{ width:186px;margin-left: 0px;display:block; }
+.hidden{display:none;}
+.show{display:block; }
 
 .arrow{
   position:fixed;
