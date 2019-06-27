@@ -3,18 +3,13 @@ import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow } from 'elec
 const path = require('path')
 
 const i18n = {
-  // 默认中文
-  locale: 'zh-CN',
-  messages: {
-    // 语言包路径
     'zh-CN': require('../lang/zh'),
     'en-US': require('../lang/en')
-  }
 }
 
 export default class MainMenu{
   constructor(mainWindow) {
-    var menu = i18n.messages[app.getLocale()].lang.menu
+    this.menu = i18n[app.getLocale()].lang.menu
     this.mainWindow = mainWindow
     this.devMenu = {
       label:"Developer tools",
@@ -29,14 +24,14 @@ export default class MainMenu{
       }]
     }
     this.viewMenu = {
-      label:menu.view,
+      label:this.menu.view,
       after: ['1'],
       submenu:[
         {
-          label:menu.themes,
+          label:this.menu.themes,
           submenu:[
             {
-              label:menu.default,
+              label:this.menu.default,
               type:"radio",
               checked:true,
               click:() => {
@@ -44,21 +39,21 @@ export default class MainMenu{
               }
             },
             {
-              label:menu.eye,
+              label:this.menu.eye,
               type:"radio",
               click:() => {
                 this.changeTheme("eye")
               }
             },
             {
-              label:menu.dark,
+              label:this.menu.dark,
               type:"radio",
               click:() => {
                 this.changeTheme("dark")
               }
             },
             {
-              label:menu.gold,
+              label:this.menu.gold,
               type:"radio",
               click:() => {
                 this.changeTheme("gold")
@@ -67,10 +62,10 @@ export default class MainMenu{
           ]
         },
         {
-          label:menu.font,
+          label:this.menu.font,
           submenu:[
             {
-              label:menu.song,
+              label:this.menu.song,
               type:"radio",
               checked:true,
               click:() => {
@@ -78,21 +73,21 @@ export default class MainMenu{
               }
             },
             {
-              label:menu.heiti,
+              label:this.menu.heiti,
               type:"radio",
               click:() => {
                 this.changeFont("STHeiti")
               }
             },
             {
-              label:menu.kaiti,
+              label:this.menu.kaiti,
               type:"radio",
               click:() => {
                 this.changeFont("STKaiti")
               }
             },
             {
-              label:menu.serif,
+              label:this.menu.serif,
               type:"radio",
               click:() => {
                 this.changeFont("sans-serif")
@@ -101,7 +96,7 @@ export default class MainMenu{
           ]
         },
         {
-          label:menu.zoomin,
+          label:this.menu.zoomin,
           accelerator:"CmdOrCtrl+Plus",
           click:() => {
             this.zoom("zoomIn")
@@ -118,7 +113,7 @@ export default class MainMenu{
           type:"separator"
         },
         {
-          label:menu.bookmark,
+          label:this.menu.bookmark,
           accelerator:"CmdOrCtrl+B",
           click:() => {
             this.bookmark()
@@ -135,14 +130,14 @@ export default class MainMenu{
           type:"separator"
         },
         {
-          label:menu.directory,
+          label:this.menu.directory,
           accelerator:"CmdOrCtrl+T",
           click:() => {
             this.list("dir")
           }
         },
         {
-          label:menu.find,
+          label:this.menu.find,
           accelerator:"CmdOrCtrl+F",
           click:() => {
             this.find()
@@ -152,7 +147,7 @@ export default class MainMenu{
     }
     this.template = [
       {
-        label:menu.file,
+        label:this.menu.file,
         submenu:[
           {
             role: "about"
@@ -161,14 +156,14 @@ export default class MainMenu{
             type:"separator"
           },
           {
-            label:menu.open,
+            label:this.menu.open,
             accelerator:"CmdOrCtrl+O",
             click:() => {
               this.openbook()
             }
           },
           {
-            label:menu.quit,
+            label:this.menu.quit,
             accelerator:"CmdOrCtrl+Q",
             click(){
               app.quit();
@@ -181,7 +176,7 @@ export default class MainMenu{
         role:"editMenu"
       },
       {
-        label:menu.window,
+        label:this.menu.window,
         submenu:[
           {
             role:"Minimize"
@@ -247,29 +242,29 @@ export default class MainMenu{
 
   createPopupMenu(event,data){
     const menu = new Menu()
-  	menu.append(new MenuItem({ label: 'keynote',submenu:[{label:"yellow",click:() => {
+  	menu.append(new MenuItem({ label: this.menu.keynote,submenu:[{label:this.menu.yellow,click:() => {
         this.mainWindow.webContents.send("keynote",{range:data.range,color:"yellow"})
     }},
-    {label:"green",click:() => {
+    {label:this.menu.green,click:() => {
         this.mainWindow.webContents.send("keynote",{range:data.range,color:"green"})
     }},
-    {label:"cyan",click:() => {
+    {label:this.menu.cyan,click:() => {
         this.mainWindow.webContents.send("keynote",{range:data.range,color:"cyan"})
     }},
-    {label:"pink",click:() => {
+    {label:this.menu.pink,click:() => {
         this.mainWindow.webContents.send("keynote",{range:data.range,color:"pink"})
     }},
-    {label:"purple",click:() => {
+    {label:this.menu.purple,click:() => {
         this.mainWindow.webContents.send("keynote",{range:data.range,color:"purple"})
     }},
-    {label: 'underline',click:() => {
+    {label: this.menu.underline,click:() => {
         this.mainWindow.webContents.send("underline",data.range)
     }}] }))
-    menu.append(new MenuItem({ label: 'add comment',click:() => {
+    menu.append(new MenuItem({ label: this.menu.comment,click:() => {
         this.mainWindow.webContents.send("comment",data.range)
     } }))
   	menu.append(new MenuItem({ type: 'separator' }))
-  	menu.append(new MenuItem({ label: 'copy', click:() => {
+  	menu.append(new MenuItem({ label: this.menu.copy, click:() => {
   				clipboard.writeText(data.text)
   			}
   	}))

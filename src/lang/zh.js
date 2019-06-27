@@ -21,6 +21,15 @@ export const lang = {
     bookmarks:"显示书签",
     directory:"目录",
     find:"查找...",
-    window:"窗口"
+    window:"窗口",
+    keynote:"笔记",
+    yellow:"黄",
+    green:"绿",
+    cyan:"青",
+    pink:"红",
+    purple:"紫",
+    underline:"下划线",
+    comment:"添加笔记...",
+    copy:"复制"
   }
 }

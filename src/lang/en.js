@@ -21,6 +21,15 @@ export const lang = {
     bookmarks:"List bookmarks",
     directory:"Directory",
     find:"Find...",
-    window:"Window"
+    window:"Window",
+    keynote:"keynote",
+    yellow:"yellow",
+    green:"green",
+    cyan:"cyan",
+    pink:"pink",
+    purple:"purple",
+    underline:"underline",
+    comment:"comment...",
+    copy:"copy"
   }
 }
