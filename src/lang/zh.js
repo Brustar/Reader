@@ -1,0 +1,26 @@
+export const lang = {
+  menu:{
+    file:"文件",
+    about:"关于阅读器",
+    open:"打开...",
+    quit:"退出",
+    view:"视图",
+    themes:"主题",
+    default:"默认",
+    eye:"护眼",
+    dark:"黑夜",
+    gold:"金色",
+    font:"字体",
+    song:"宋体",
+    heiti:"黑体",
+    kaiti:"楷体",
+    serif:"苹方",
+    zoomin:"放大",
+    zoomout:"缩小",
+    bookmark:"加入书签",
+    bookmarks:"显示书签",
+    directory:"目录",
+    find:"查找...",
+    window:"窗口"
+  }
+}

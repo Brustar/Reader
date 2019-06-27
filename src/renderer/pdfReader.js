@@ -14,8 +14,8 @@ export default class pdfReader {
     document.title = path.basename(url)
     pdf.getDocument(url).then((doc) => {
       this.doc = doc
-      this.renderPage()
       progress(doc.numPages)
+      this.renderPage()
     })
   }
 

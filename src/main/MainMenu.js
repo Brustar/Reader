@@ -2,8 +2,19 @@
 import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow } from 'electron'
 const path = require('path')
 
+const i18n = {
+  // 默认中文
+  locale: 'zh-CN',
+  messages: {
+    // 语言包路径
+    'zh-CN': require('../lang/zh'),
+    'en-US': require('../lang/en')
+  }
+}
+
 export default class MainMenu{
   constructor(mainWindow) {
+    var menu = i18n.messages[app.getLocale()].lang.menu
     this.mainWindow = mainWindow
     this.devMenu = {
       label:"Developer tools",
@@ -18,14 +29,14 @@ export default class MainMenu{
       }]
     }
     this.viewMenu = {
-      label:"View",
+      label:menu.view,
       after: ['1'],
       submenu:[
         {
-          label:"themes",
+          label:menu.themes,
           submenu:[
             {
-              label:"default",
+              label:menu.default,
               type:"radio",
               checked:true,
               click:() => {
@@ -33,21 +44,21 @@ export default class MainMenu{
               }
             },
             {
-              label:"eye",
+              label:menu.eye,
               type:"radio",
               click:() => {
                 this.changeTheme("eye")
               }
             },
             {
-              label:"dark",
+              label:menu.dark,
               type:"radio",
               click:() => {
                 this.changeTheme("dark")
               }
             },
             {
-              label:"gold",
+              label:menu.gold,
               type:"radio",
               click:() => {
                 this.changeTheme("gold")
@@ -56,10 +67,10 @@ export default class MainMenu{
           ]
         },
         {
-          label:"Font",
+          label:menu.font,
           submenu:[
             {
-              label:"宋体",
+              label:menu.song,
               type:"radio",
               checked:true,
               click:() => {
@@ -67,21 +78,21 @@ export default class MainMenu{
               }
             },
             {
-              label:"黑体",
+              label:menu.heiti,
               type:"radio",
               click:() => {
                 this.changeFont("STHeiti")
               }
             },
             {
-              label:"楷体",
+              label:menu.kaiti,
               type:"radio",
               click:() => {
                 this.changeFont("STKaiti")
               }
             },
             {
-              label:"苹方",
+              label:menu.serif,
               type:"radio",
               click:() => {
                 this.changeFont("sans-serif")
@@ -90,14 +101,14 @@ export default class MainMenu{
           ]
         },
         {
-          label:"zoom in",
+          label:menu.zoomin,
           accelerator:"CmdOrCtrl+Plus",
           click:() => {
             this.zoom("zoomIn")
           }
         },
         {
-          label:"zoom out",
+          label:menu.zoomout,
           accelerator:"CmdOrCtrl+-",
           click:() => {
             this.zoom("zoomOut")
@@ -107,14 +118,14 @@ export default class MainMenu{
           type:"separator"
         },
         {
-          label:"bookmark",
+          label:menu.bookmark,
           accelerator:"CmdOrCtrl+B",
           click:() => {
             this.bookmark()
           }
         },
         {
-          label:"list bookmarks",
+          label:menu.bookmarks,
           accelerator:"CmdOrCtrl+L",
           click:() => {
             this.list("bookmark")
@@ -124,14 +135,14 @@ export default class MainMenu{
           type:"separator"
         },
         {
-          label:"directory",
+          label:menu.directory,
           accelerator:"CmdOrCtrl+T",
           click:() => {
             this.list("dir")
           }
         },
         {
-          label:"find...",
+          label:menu.find,
           accelerator:"CmdOrCtrl+F",
           click:() => {
             this.find()
@@ -141,7 +152,7 @@ export default class MainMenu{
     }
     this.template = [
       {
-        label:"File",
+        label:menu.file,
         submenu:[
           {
             role: "about"
@@ -150,14 +161,14 @@ export default class MainMenu{
             type:"separator"
           },
           {
-            label:"open book",
+            label:menu.open,
             accelerator:"CmdOrCtrl+O",
             click:() => {
               this.openbook()
             }
           },
           {
-            label:"quit",
+            label:menu.quit,
             accelerator:"CmdOrCtrl+Q",
             click(){
               app.quit();
@@ -170,7 +181,7 @@ export default class MainMenu{
         role:"editMenu"
       },
       {
-        label:"Window",
+        label:menu.window,
         submenu:[
           {
             role:"Minimize"
