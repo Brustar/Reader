@@ -15,7 +15,7 @@
 
     <transition name="search">
       <searchbar v-if="canSearch" @search="search"></searchbar>
-      <themebar v-if="canTheme" :sel="sel" :selFont="selFont" @font="font" @theme="theme"></themebar>
+      <themebar v-if="canTheme" :sel="sel" :selFont="selFont" @font="font" @theme="theme" @zoomOut="zoomOut" @zoomIn="zoomIn"></themebar>
     </transition>
     </ul>
   </div>

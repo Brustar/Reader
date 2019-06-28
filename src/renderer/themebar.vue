@@ -29,6 +29,12 @@ export default {
     },
     theme(name){
       this.$emit("theme",name)
+    },
+    zoomOut(){
+      this.$emit("zoomOut")
+    },
+    zoomIn(){
+      this.$emit("zoomIn")
     }
   }
 }

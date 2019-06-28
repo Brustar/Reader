@@ -3,9 +3,9 @@ const ePub = require('epubjs').default
 
 export default class Reader {
   constructor() {
-    this.fontsize = 16
-    this.maxSize = 24
-    this.minSize = 8
+    this.fontsize = 1
+    this.maxSize = 3
+    this.minSize = 0.3
     this.themeList = require('./mainThemes')
   }
 
@@ -97,21 +97,17 @@ export default class Reader {
 
   zoomIn(){
     if(this.themes){
-      var size = this.fontsize++
-      size = size > this.maxSize?this.maxSize:size
-      this.themes.fontSize(size+'px')
-      if(size == this.maxSize)
-        this.fontsize = size
+      this.fontsize = this.fontsize+0.1
+      this.fontsize = this.fontsize > this.maxSize?this.maxSize:this.fontsize
+      this.themes.fontSize(this.fontsize+'em')
     }
   }
 
   zoomOut(){
     if(this.themes){
-      var size = this.fontsize--
-      size = size < this.minSize?this.minSize:size
-      this.themes.fontSize(size +'px')
-      if(size == this.minSize)
-        this.fontsize = size
+      this.fontsize = this.fontsize-0.1
+      this.fontsize = this.fontsize < this.minSize?this.minSize:this.fontsize
+      this.themes.fontSize(this.fontsize +'em')
     }
   }
 
