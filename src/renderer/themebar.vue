@@ -5,16 +5,16 @@
       <li @click="zoomIn()"><img src="../assets/zoomIn.png"/></li>
     </ul>
     <div class="theme">
-      <span class="default" @click="theme('default')"><span v-if="sel==1" class="correct-dark">√</span></span>
-      <span class="gold" @click="theme('gold')"><span v-if="sel==2" class="correct-dark">√</span></span>
-      <span class="eye" @click="theme('eye')"><span v-if="sel==3" class="correct-dark">√</span></span>
-      <span class="dark" @click="theme('dark')"><span v-if="sel==4" class="correct">√</span></span>
+      <span class="rect default" @click="theme('default')"><span v-if="sel==1" class="correct">√</span></span>
+      <span class="rect gold" @click="theme('gold')"><span v-if="sel==2" class="correct">√</span></span>
+      <span class="rect eye" @click="theme('eye')"><span v-if="sel==3" class="correct">√</span></span>
+      <span class="rect dark" @click="theme('dark')"><span v-if="sel==4" class="correct white">√</span></span>
     </div>
     <div class="font">
-      <div class="song" @click="font('STSong')"><span v-if="selFont==1">√</span><i18n :prop="'song'" /></div>
-      <div class="hei" @click="font('STHeiti')"><span v-if="selFont==2">√</span><i18n :prop="'heiti'" /></div>
-      <div class="kai" @click="font('STKaiti')"><span v-if="selFont==3">√</span><i18n :prop="'kaiti'" /></div>
-      <div class="apple" @click="font('sans-serif')"><span v-if="selFont==4">√</span><i18n :prop="'serif'" /></div>
+      <div class="song pad" @click="font('STSong')"><span v-if="selFont==1">√</span><i18n :prop="'song'" /></div>
+      <div class="hei pad" @click="font('STHeiti')"><span v-if="selFont==2">√</span><i18n :prop="'heiti'" /></div>
+      <div class="kai pad" @click="font('STKaiti')"><span v-if="selFont==3">√</span><i18n :prop="'kaiti'" /></div>
+      <div class="apple pad" @click="font('sans-serif')"><span v-if="selFont==4">√</span><i18n :prop="'serif'" /></div>
     </div>
   </div>
 </template>
@@ -74,21 +74,32 @@ export default {
   margin-top: 20px;
 }
 
-.correct{
-  display:block;color:#FFF;height:30px;line-height:30px;text-align:center;font-size:18px;
+.white{
+  color:#FFF;
 }
 
-.correct-dark{
+.correct{
   display:block;height:30px;line-height:30px;text-align:center;font-size:18px;
 }
-.song{font-family: "STSong";padding: 12px;}
-.hei{font-family: "STHeiti";padding: 12px;}
-.kai{font-family: "STKaiti";padding: 12px;}
-.apple{font-family: "sans-serif";padding: 12px;}
+.song{font-family: "STSong";}
+.hei{font-family: "STHeiti";}
+.kai{font-family: "STKaiti";}
+.apple{font-family: "sans-serif";}
+.pad{padding: 12px;}
 
-.default{margin-right: 10px;border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #fff;}
-.gold{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #f1ece2;}
-.eye{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #ceeaba}
-.dark{margin-right: 10px; border-radius:50%;border: 1px;display:inline-block;height: 30px;width: 30px;vertical-align: top;border-style: solid; background: #000;}
+.rect{
+  margin-right: 10px;
+  border-radius:50%;
+  border: 1px;
+  display:inline-block;
+  height: 30px;
+  width: 30px;
+  vertical-align: top;
+  border-style: solid;
+}
+.default{background: #fff;}
+.gold{background: #f1ece2;}
+.eye{background: #ceeaba}
+.dark{background: #000;}
 
 </style>

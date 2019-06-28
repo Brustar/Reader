@@ -30,6 +30,10 @@ export const lang = {
     purple:"purple",
     underline:"underline",
     comment:"comment...",
+    dir:"Directory",
+    bookmark:"Bookmark",
+    search:"Search",
+    note:"Keynote",
     copy:"copy"
   },
   message:{

@@ -29,6 +29,7 @@ import toolbar from "./toolbar"
 import leftbar from "./leftbar"
 import notebox from "./notebox"
 import i18n from "./i18n"
+const li18n = require("./locale").i18n
 const path = require('path')
 
 export default {
@@ -40,7 +41,7 @@ export default {
     return {
       dirs:[],
       percentage:0,
-      title:"目录",
+      title:"",
       bookmarked:false,
       show:false,
       cannote:false,
@@ -137,20 +138,17 @@ export default {
     list(action,key){
       if(action == "dir"){
         this.dirs = this.book.listdir()
-        this.title = "目录"
       }
       if(action == "bookmark"){
         this.dirs = this.book.listBookmarks()
-        this.title = "书签"
       }
       if(action == "search"){
         this.dirs = this.search(key)
-        this.title = "搜索"
       }
       if(action == "note"){
         this.dirs = this.book.listnotes()
-        this.title = "备注"
       }
+      this.title = li18n[li18n.locale].lang.message[action]
       this.show = !this.show
     },
     nav(url){

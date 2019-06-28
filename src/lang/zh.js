@@ -42,6 +42,10 @@ export const lang = {
     heiti:"黑体",
     kaiti:"楷体",
     serif:"苹方",
+    dir:"目录",
+    bookmark:"书签",
+    search:"搜索",
+    note:"备注",
     status:"第{0}页，共{1}页"
   }
 }
