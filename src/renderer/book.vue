@@ -5,7 +5,7 @@
     @zoomIn="zoomIn" @zoomOut="zoomOut" @theme="changeTheme" @font="changeFont" :canbook="canbook" :ispdf="ispdf"></toolbar>
 
     <div v-if="!ispdf" id="container" class="book" @dblclick="open" @dragstart='dstart($event)' @dragover='dstart($event)' @drop="drag($event)">
-        <span class="tips"><img @click="open" src="../assets/document.png" /> Double click or drag file here.</span>
+        <span class="tips"><img @click="open" src="../assets/document.png" /> <i18n :prop="'tip'" /></span>
     </div>
     <div v-if="ispdf" class="pdfcontainer">
 
@@ -28,12 +28,13 @@ import statubar from "./statubar"
 import toolbar from "./toolbar"
 import leftbar from "./leftbar"
 import notebox from "./notebox"
+import i18n from "./i18n"
 const path = require('path')
 
 export default {
   name: 'book',
   components:{
-		statubar,toolbar,leftbar,notebox
+		statubar,toolbar,leftbar,notebox,i18n
 	},
   data () {
     return {

@@ -31,5 +31,17 @@ export const lang = {
     underline:"下划线",
     comment:"添加笔记...",
     copy:"复制"
+  },
+  message:{
+    tip:"双击或者拖拽文件到此处.",
+    keynote:"请输入备注",
+    key:"请输入关键字",
+    position:"位置",
+    page:"页数",
+    song:"宋体",
+    heiti:"黑体",
+    kaiti:"楷体",
+    serif:"苹方",
+    status:"第{0}页，共{1}页"
   }
 }

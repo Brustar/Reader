@@ -31,5 +31,17 @@ export const lang = {
     underline:"underline",
     comment:"comment...",
     copy:"copy"
+  },
+  message:{
+    tip:"Double click or drag file here.",
+    keynote:"Please input keynote",
+    key:"Please input your key",
+    position:"Position",
+    page:"page",
+    song:"Song",
+    heiti:"Heiti",
+    kaiti:"Kaiti",
+    serif:"Serif",
+    status:"page {0} / {1}"
   }
 }

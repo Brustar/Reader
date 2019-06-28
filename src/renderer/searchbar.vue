@@ -5,12 +5,18 @@
 </template>
 
 <script>
+const i18n = require("./locale").i18n
 export default {
   name: 'searchbar',
   data(){
     return {
-      keyword:""
+      keyword:"",
+      placeholder:""
     }
+  },
+  mounted:function(){
+    var locale = i18n.locale
+    this.placeholder = i18n[locale].lang.message['key']
   },
   methods:{
     search(e){

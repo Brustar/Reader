@@ -11,17 +11,21 @@
       <span class="dark" @click="theme('dark')"><span v-if="sel==4" class="correct">√</span></span>
     </div>
     <div class="font">
-      <div class="song" @click="font('STSong')"><span v-if="selFont==1">√</span>宋体</div>
-      <div class="hei" @click="font('STHeiti')"><span v-if="selFont==2">√</span>黑体</div>
-      <div class="kai" @click="font('STKaiti')"><span v-if="selFont==3">√</span>楷体</div>
-      <div class="apple" @click="font('sans-serif')"><span v-if="selFont==4">√</span>苹方</div>
+      <div class="song" @click="font('STSong')"><span v-if="selFont==1">√</span><i18n :prop="'song'" /></div>
+      <div class="hei" @click="font('STHeiti')"><span v-if="selFont==2">√</span><i18n :prop="'heiti'" /></div>
+      <div class="kai" @click="font('STKaiti')"><span v-if="selFont==3">√</span><i18n :prop="'kaiti'" /></div>
+      <div class="apple" @click="font('sans-serif')"><span v-if="selFont==4">√</span><i18n :prop="'serif'" /></div>
     </div>
   </div>
 </template>
 
 <script>
+import i18n from "./i18n"
 export default {
   name: 'searchbar',
+  components:{
+		i18n
+	},
   props:['sel','selFont'],
   methods:{
     font(name){
