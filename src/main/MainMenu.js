@@ -2,10 +2,7 @@
 import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow } from 'electron'
 const path = require('path')
 
-const i18n = {
-    'zh-CN': require('../lang/zh'),
-    'en-US': require('../lang/en')
-}
+const i18n = require('../renderer/locale')
 
 export default class MainMenu{
   constructor(mainWindow) {
