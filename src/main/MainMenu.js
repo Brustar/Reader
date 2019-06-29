@@ -6,7 +6,6 @@ const i18n = require('../renderer/locale').i18n
 
 export default class MainMenu{
   constructor(mainWindow) {
-    console.dir(i18n)
     this.menu = i18n[app.getLocale()].lang.menu
     this.mainWindow = mainWindow
     this.devMenu = {
