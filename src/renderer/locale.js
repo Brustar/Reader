@@ -1,5 +1,7 @@
+import { remote } from 'electron'
+
 export const i18n = {
-    locale:process.env.LC_CTYPE,
+    locale:remote.app.getLocale(),
     signMix:function(str){
       console.dir(arguments)
       for(var i = 0; i < arguments.length; i++)

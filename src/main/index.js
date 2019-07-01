@@ -14,7 +14,6 @@ let mainMenu
 const isDevMode = process.execPath.match(/[\\/]electron/)
 
 const createWindow = async () => {
-  process.env.LC_CTYPE = app.getLocale()
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: electron.screen.getPrimaryDisplay().workAreaSize.width,

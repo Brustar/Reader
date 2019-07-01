@@ -24,7 +24,6 @@ export default class Reader {
     else {
       this.rendition.display()
     }
-
     this.book.loaded.metadata.then(function(meta){
       document.title = meta.title
     })
