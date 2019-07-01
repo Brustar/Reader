@@ -1,8 +1,7 @@
 
 import { app , dialog , Menu , MenuItem , clipboard , BrowserWindow } from 'electron'
 const path = require('path')
-
-const i18n = require('../renderer/locale').i18n
+const i18n = require('../lib/locale').i18n
 
 export default class MainMenu{
   constructor(mainWindow) {

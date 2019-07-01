@@ -1,7 +1,7 @@
 <template>
   <div class="status">
     <div v-if="percentage>0 && !ispdf"><i18n :prop="'position'" /> {{percentage}}%
-      <div class="bookmark"><img v-if="bookmarked" src="assets/bookmark_sel.png"/></div>
+      <div class="bookmark"><img v-if="bookmarked" src="../assets/bookmark_sel.png"/></div>
     </div>
     <div v-if="ispdf"><i18n :prop="'page'" /> {{page}} / {{total}}</div>
 </div>

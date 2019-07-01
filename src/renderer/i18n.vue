@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const i18n = require("./locale").i18n
+const i18n = require("../lib/locale").i18n
 export default {
   name: 'i18n',
   props:['prop'],

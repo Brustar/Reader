@@ -22,14 +22,15 @@
 
 <script>
 const {ipcRenderer} = require('electron')
-import Reader from "./Reader";
-import pdfReader from "./pdfReader"
+import Reader from "../lib/Reader";
+import pdfReader from "../lib/pdfReader"
 import statubar from "./statubar"
 import toolbar from "./toolbar"
 import leftbar from "./leftbar"
 import notebox from "./notebox"
 import i18n from "./i18n"
-const li18n = require("./locale").i18n
+
+const li18n = require("../lib/locale").i18n
 const path = require('path')
 
 export default {
@@ -156,6 +157,7 @@ export default {
       this.show = false
     },
     bookmark(){
+      alert(0)
       this.book.bookmark()
     },
     underline(range){
