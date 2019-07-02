@@ -42,7 +42,7 @@ export default class db{
   }
 
   updateBookmarks(path,bookmarks){
-    this.$db.update({ path: path }, $set:{{ bookmarks: bookmarks }}, {}, function () {
+    this.$db.update({ path: path }, {$set:{ bookmarks: bookmarks }}, {}, function () {
     })
   }
 
@@ -54,7 +54,7 @@ export default class db{
   }
 
   updateNotes(path,notes){
-    this.$db.update({ path: path }, $set:{{ notes: notes }}, {}, function () {
+    this.$db.update({ path: path }, {$set:{ notes: notes }}, {}, function () {
     })
   }
 

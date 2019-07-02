@@ -157,7 +157,6 @@ export default {
       this.show = false
     },
     bookmark(){
-      alert(0)
       this.book.bookmark()
     },
     underline(range){

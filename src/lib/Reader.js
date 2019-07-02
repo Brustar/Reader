@@ -63,11 +63,11 @@ export default class Reader {
   initData(path){
     this.path = path
     this.$db.findBookmarks(path,(bookmarks) =>{
-      this.bookmarks = bookmarks
+      this.bookmarks = bookmarks || []
     })
     //var nkey = this.book.key(path)+'-notes'
     this.$db.findNotes(path,(notes) => {
-      this.notes = notes
+      this.notes = notes || []
     })
   }
 
@@ -175,14 +175,14 @@ export default class Reader {
   }
 
   isBookmarked(cfi) {
-	   return this.bookmarks && this.bookmarks.indexOf(cfi)>-1;
+	   return this.bookmarks.indexOf(cfi)>=0;
   }
 
   bookmark(){
     var cfi = this.rendition.currentLocation().start.cfi
 		var bookmarked = this.isBookmarked(cfi);
     if(!bookmarked){
-      this.bookmarks.push(cfi)
+        this.bookmarks.push(cfi)
     }
     this.$db.updateBookmarks(this.path,this.bookmarks)
   }
