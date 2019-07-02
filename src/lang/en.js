@@ -46,6 +46,7 @@ export const lang = {
     heiti:"Heiti",
     kaiti:"Kaiti",
     serif:"Serif",
+    empty:"no ",
     status:"page {0} / {1}"
   }
 }

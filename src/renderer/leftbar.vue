@@ -5,14 +5,21 @@
       <ul>
         <li v-for="item in dirs" @click="nav(item.href)">{{item.label}}</li>
       </ul>
+      <div class="empty" v-if="dirs.length==0"><i18n :prop="'empty'" />{{title}}</div>
     </div>
+
   </transition>
 </template>
 
 <script>
+import i18n from "./i18n"
+
 export default {
   name: 'leftbar',
   props: ['show','title','dirs'],
+  components:{
+		i18n
+	},
   methods:{
     nav(url){
       this.$emit('nav',url)
@@ -49,4 +56,12 @@ export default {
   font-family: sans-serif;
 }
 
+.empty{
+  padding: 0px;
+  width:300px;
+  height:900px;
+  text-align: center;
+  vertical-align:middle;
+  display: table-cell;
+}
 </style>

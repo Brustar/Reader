@@ -46,6 +46,7 @@ export const lang = {
     bookmark:"书签",
     search:"搜索",
     note:"备注",
+    empty:"无",
     status:"第{0}页，共{1}页"
   }
 }
