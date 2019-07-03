@@ -19,12 +19,12 @@ const createWindow = async () => {
     width: electron.screen.getPrimaryDisplay().workAreaSize.width,
     height: electron.screen.getPrimaryDisplay().workAreaSize.height,
   })
-
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`)
   // Open the DevTools.
   if (isDevMode) {
-    await installExtension(VUEJS_DEVTOOLS)
+	  if(process.platform!="win32")
+		  await installExtension(VUEJS_DEVTOOLS)
     mainWindow.webContents.openDevTools()
   }
 
