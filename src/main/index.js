@@ -23,11 +23,10 @@ const createWindow = async () => {
   mainWindow.loadURL(`file://${__dirname}/../renderer/index.html`)
   // Open the DevTools.
   if (isDevMode) {
-	  if(process.platform!="win32")
-		  await installExtension(VUEJS_DEVTOOLS)
+	  //if(process.platform!="win32")
+		  //await installExtension(VUEJS_DEVTOOLS)
     mainWindow.webContents.openDevTools()
   }
-
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -35,11 +34,8 @@ const createWindow = async () => {
     // when you should delete the corresponding element.
     mainWindow = null
   })
-
   mainWindow.on('enter-full-screen', () => {mainWindow.webContents.send("efc")})
-
   mainWindow.on('leave-full-screen', () => {mainWindow.webContents.send("lfc")})
-
   mainMenu = new MainMenu(mainWindow)
   if (isDevMode) {
     enableLiveReload()
@@ -54,7 +50,9 @@ ipcMain.on('bookClick',(event)=>{
 })
 
 ipcMain.on('openbook',(event)=>{
+	console.log("open book start."+mainMenu)
   mainMenu.openbook()
+  console.log("open book end.")
 })
 
 ipcMain.on('appendmenu',(event)=>{
